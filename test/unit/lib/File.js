@@ -252,9 +252,16 @@ describe("File", function() {
     });
 
     describe("copyTo(parent, name)", function() {
-      it("copyTo(parent, name)", function() {
+      it("copyTo(parent : string, name : string)", function() {
         dst.exists().must.be.eq(false);
         src.copyTo(DST_DIR, "a.txt");
+        dst.exists().must.be.eq(true);
+        dst.text.must.be.eq(src.text);
+      });
+
+      it("copyTo(parent : Dir, name : string)", function() {
+        dst.exists().must.be.eq(false);
+        src.copyTo(new Dir(DST_DIR), "a.txt");
         dst.exists().must.be.eq(true);
         dst.text.must.be.eq(src.text);
       });
@@ -296,8 +303,17 @@ describe("File", function() {
     });
 
     describe("moveTo(parent, name)", function() {
-      it("moveTo(parent, name)", function() {
+      it("moveTo(parent : string, name : string)", function() {
         f.moveTo(DST_DIR, "b.txt");
+        f.parentPath.must.be.eq(DST_DIR);
+        f.name.must.be.eq("b.txt");
+        file(DST_DIR, "a.txt").must.not.exist();
+        f.exists().must.be.eq(true);
+        f.text.must.be.eq(src.text);
+      });
+
+      it("moveTo(parent : Dir, name : string)", function() {
+        f.moveTo(new Dir(DST_DIR), "b.txt");
         f.parentPath.must.be.eq(DST_DIR);
         f.name.must.be.eq("b.txt");
         file(DST_DIR, "a.txt").must.not.exist();

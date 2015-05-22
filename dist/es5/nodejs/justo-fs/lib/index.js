@@ -173,8 +173,8 @@ var Entry = (function () {
      * @param dst:string  The destination path.
      *
      * @overload Using a parent directory and an entry name.
-     * @param parent:string The parent directory.
-     * @param name:string   The entry name.
+     * @param parent:string|Dir The parent directory.
+     * @param name:string       The entry name.
      *
      */
     value: function copyTo() {
@@ -189,7 +189,12 @@ var Entry = (function () {
         dst = args[0];
         if (/[\/\\]$/.test(dst)) dst = path.join(dst, this.name);
       } else if (args.length > 1) {
-        dst = path.join.apply(path, args);
+        var _parent = args[0];
+        var _name2 = args[1];
+
+        if (_parent instanceof Dir) _parent = _parent.path;
+
+        dst = path.join(_parent, _name2);
       }
 
       //(2) copy
@@ -205,8 +210,8 @@ var Entry = (function () {
      * @param dst:string  The new location.
      *
      * @overload Using a parent directory and an entry name.
-     * @param parent:string The parent directory.
-     * @param name:string   The entry name.
+     * @param parent:string|Dir The parent directory.
+     * @param name:string       The entry name.
      */
     value: function moveTo() {
       for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -220,7 +225,12 @@ var Entry = (function () {
         dst = args[0];
         if (/[\/\\]$/.test(dst)) dst = path.join(dst, this.name);
       } else if (args.length > 1) {
-        dst = path.join.apply(path, args);
+        var _parent2 = args[0];
+        var _name3 = args[1];
+
+        if (_parent2 instanceof Dir) _parent2 = _parent2.path;
+
+        dst = path.join(_parent2, _name3);
       }
 
       //(2) move

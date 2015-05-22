@@ -170,9 +170,16 @@ describe("Dir", function() {
     });
 
     describe("copyTo(parent, name)", function() {
-      it("copyTo(parent, name)", function() {
+      it("copyTo(parent : string, name : string)", function() {
         dst.exists().must.be.eq(false);
         src.copyTo(DST_DIR, "data");
+        dst.exists().must.be.eq(true);
+        dir(dst.path).must.have(["a.txt", "b.txt", "file.json", "file.yml"]);
+      });
+
+      it("copyTo(parent : Dir, name : string)", function() {
+        dst.exists().must.be.eq(false);
+        src.copyTo(new Dir(DST_DIR), "data");
         dst.exists().must.be.eq(true);
         dir(dst.path).must.have(["a.txt", "b.txt", "file.json", "file.yml"]);
       });
@@ -215,9 +222,19 @@ describe("Dir", function() {
     });
 
     describe("moveTo(parent, name)", function() {
-      it("moveTo(parent, name)", function() {
+      it("moveTo(parent : string, name : string)", function() {
         dir(DST_DIR, "src").must.not.exist();
         d.moveTo(DST_DIR, "src");
+        d.parentPath.must.be.eq(DST_DIR);
+        d.name.must.be.eq("src");
+        dir(DST_DIR, "data").must.not.exist();
+        d.exists().must.be.eq(true);
+        dir(DST_DIR, "src").must.have(["a.txt", "b.txt", "file.json", "file.yml"]);
+      });
+
+      it("moveTo(parent : Dir, name : string)", function() {
+        dir(DST_DIR, "src").must.not.exist();
+        d.moveTo(new Dir(DST_DIR), "src");
         d.parentPath.must.be.eq(DST_DIR);
         d.name.must.be.eq("src");
         dir(DST_DIR, "data").must.not.exist();
