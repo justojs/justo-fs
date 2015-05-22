@@ -21,18 +21,29 @@ describe("Dir", function() {
   });
 
   describe("#constructor()", function() {
-    it("constructor(path)", function() {
-      var d = new Dir("test/unit/data");
+    describe("constructor(path : string)", function() {
+      it("constructor(path)", function() {
+        var d = new Dir("test/unit/data");
 
-      d.path.must.match(/^test.unit.data$/);
-      d.parentPath.must.match(/^test.unit$/);
+        d.path.must.match(/^test.unit.data$/);
+        d.parentPath.must.match(/^test.unit$/);
+      });
     });
 
-    it("constructor(parent, dir)", function() {
-      var d = new Dir("test/unit", "data");
+    describe("constructor(parent, name)", function() {
+      it("constructor(parent : string, name : string)", function() {
+        var d = new Dir("test/unit", "data");
 
-      d.path.must.match(/^test.unit.data$/);
-      d.parentPath.must.match(/^test.unit$/);
+        d.path.must.match(/^test.unit.data$/);
+        d.parentPath.must.match(/^test.unit$/);
+      });
+
+      it("constructor(parent : Dir, name : string)", function() {
+        var d = new Dir(new Dir("test/unit"), "data");
+
+        d.path.must.match(/^test.unit.data$/);
+        d.parentPath.must.match(/^test.unit$/);
+      });
     });
   });
 

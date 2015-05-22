@@ -48,7 +48,14 @@ var Entry = (function () {
     var ep;
 
     //(1) arguments
-    if (args.length == 1) ep = args[0];else if (args.length > 1) ep = path.join.apply(path, args);
+    if (args.length == 1) {
+      ep = args[0];
+    } else if (args.length > 1) {
+      var prnt = args[0];
+      var _name = args[1];
+
+      ep = path.join(prnt instanceof Dir ? prnt.path : prnt, _name.toString());
+    }
 
     //(2) init
     Object.defineProperty(this, "_path", { value: path.normalize(ep), writable: true });
@@ -246,8 +253,8 @@ var File = (function (_Entry) {
    * @param(attr) path
    *
    * @overload
-   * @param dir:string  The parent directory.
-   * @param name:string The file name.
+   * @param dir:string|Dir  The parent directory.
+   * @param name:string     The file name.
    */
 
   function File() {
@@ -440,8 +447,8 @@ var Dir = (function (_Entry2) {
    * @param(attr) path
    *
    * @overload
-   * @param parent:string The parent directory.
-   * @param name:string   The directory name.
+   * @param parent:string|Dir The parent directory.
+   * @param name:string       The directory name.
    */
 
   function Dir() {
