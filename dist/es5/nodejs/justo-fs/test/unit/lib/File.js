@@ -4,7 +4,9 @@ const fsx = require("fs-extra");
 const path = require("path");
 const os = require("os");
 const file = require("justo-assert-fs").file;
-const File = require("../../../dist/es5/nodejs/justo-fs").File;
+const jfs = require("../../../dist/es5/nodejs/justo-fs");
+const File = jfs.File;
+const Dir = jfs.Dir;
 
 //suite
 describe("File", function() {
@@ -20,18 +22,29 @@ describe("File", function() {
   });
 
   describe("#constructor()", function() {
-    it("constructor(path)", function() {
-      var f = new File("test/unit/data/a.txt");
+    describe("constructor(path : string)", function() {
+      it("constructor(path)", function() {
+        var f = new File("test/unit/data/a.txt");
 
-      f.path.must.match(/^test.unit.data.a\.txt$/);
-      f.parentPath.must.match(/^test.unit.data$/);
+        f.path.must.match(/^test.unit.data.a\.txt$/);
+        f.parentPath.must.match(/^test.unit.data$/);
+      });
     });
 
-    it("constructor(dir, file)", function() {
-      var f = new File("test/unit/data", "a.txt");
+    describe("construtor(dir, name)", function() {
+      it("constructor(dir : string, name : string)", function() {
+        var f = new File("test/unit/data", "a.txt");
 
-      f.path.must.match(/^test.unit.data.a\.txt$/);
-      f.parentPath.must.match(/^test.unit.data$/);
+        f.path.must.match(/^test.unit.data.a\.txt$/);
+        f.parentPath.must.match(/^test.unit.data$/);
+      });
+
+      it("constructor(dir : Dir, name : string)", function() {
+        var f = new File(new Dir("test/unit/data"), "a.txt");
+
+        f.path.must.match(/^test.unit.data.a\.txt$/);
+        f.parentPath.must.match(/^test.unit.data$/);
+      });
     });
   });
 
