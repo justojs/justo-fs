@@ -386,10 +386,10 @@ var File = (function (_Entry) {
      * Creates the files with the content of a specified file set.
      *
      * @param files:string[]  The files to concatenate.
-     * @param sep:string      The separator.
+     * @param [opts]:object   The options: header, separator and footer.
      */
     value: function createFrom(files) {
-      var sep = arguments[1] === undefined ? "" : arguments[1];
+      var opts = arguments[1] === undefined ? { header: "", separator: "", footer: "" } : arguments[1];
 
       //(1) arguments
       if (typeof files == "string") files = [files];
@@ -398,15 +398,19 @@ var File = (function (_Entry) {
       this.create();
 
       //(3) write content
+      if (opts.header) this.appendText(opts.header);
+
       for (var i = 0, written = false; i < files.length; ++i) {
         var file = new File(files[i]);
 
         if (file.exists()) {
-          if (written && sep) fs.appendFileSync(this.path, sep);
+          if (written && opts.separator) this.appendText(opts.separator);
           fs.appendFileSync(this.path, fs.readFileSync(file.path));
           written = true;
         }
       }
+
+      if (opts.footer) this.appendText(opts.footer);
     }
   }, {
     key: "appendText",

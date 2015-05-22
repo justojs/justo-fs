@@ -395,15 +395,15 @@ describe("File", function() {
       });
     });
 
-    describe("createFrom(fiiles, sep)", function() {
-      it("createFrom(files, sep) - all existing files", function() {
-        dst.createFrom([src1.path, src2.path], "---\n");
-        dst.text.must.be.eq("The a.txt file.\n---\nThe b.txt file.\n");
+    describe("createFrom(files, opts)", function() {
+      it("createFrom(files, opts) - all existing files", function() {
+        dst.createFrom([src1.path, src2.path], {header: "header\n", separator: "---\n", footer: "footer"});
+        dst.text.must.be.eq("header\nThe a.txt file.\n---\nThe b.txt file.\nfooter");
       });
 
-      it("createFrom(files, sep) - some non-existing file", function() {
-        dst.createFrom([src1.path, "test/unit/data/unknown.txt", src2.path], "---\n");
-        dst.text.must.be.eq("The a.txt file.\n---\nThe b.txt file.\n");
+      it("createFrom(files, opts) - some non-existing file", function() {
+        dst.createFrom([src1.path, "test/unit/data/unknown.txt", src2.path], {header: "header\n", separator: "---\n", footer: "footer"});
+        dst.text.must.be.eq("header\nThe a.txt file.\n---\nThe b.txt file.\nfooter");
       });
     });
   });

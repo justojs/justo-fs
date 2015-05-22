@@ -143,16 +143,20 @@ f.create();
 Creates the file using as content the concatenated content of the specified files:
 
 ```
-createFrom(files : string[], sep : string = "")
+createFrom(files : string[], opts : object = {header: "", separator: "", footer: ""})
 ```
 
-The `sep` parameter indicates the separator to use.
+The options can be:
+
+- `header` (string). Text at the beginning of the file.
+- `separator` (string). Text between files.
+- `footer` (string). Text at the end of the file.
 
 Example:
 
 ```
 f = new File("/my/dir", "file.txt");
-f.createFrom(["/my/dir/a.txt", "/my/dir/b.txt"], "\n\n");
+f.createFrom(["/my/dir/a.txt", "/my/dir/b.txt"], {separator: "\n\n"});
 ```
 
 ### appendText()
