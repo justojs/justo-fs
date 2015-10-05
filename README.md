@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/justojsx/justo-fs.svg)](https://travis-ci.org/justojsx/justo-fs)
+[![Build Status](https://travis-ci.org/justojs/justo-fs.svg)](https://travis-ci.org/justojs/justo-fs)
 
 Simple object-oriented file system API.
 
-*Proudly made in Valencia, Spain, EU.*
+*Proudly made with ♥ in Valencia, Spain, EU.*
 
 ## Table of contents
 

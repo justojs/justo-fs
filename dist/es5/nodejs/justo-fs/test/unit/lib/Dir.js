@@ -80,10 +80,10 @@ describe("Dir", function() {
 
     describe("rename", function() {
       it("name = string", function() {
-        var dir = d.parentPath;
+        var prnt = d.parentPath;
 
         d.name = "oldie";
-        d.parentPath.must.be.eq(dir);
+        d.parentPath.must.be.eq(prnt);
         d.name.must.be.eq("oldie");
       });
 

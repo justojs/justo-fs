@@ -5,11 +5,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -39,15 +39,16 @@ var Entry = (function () {
    */
 
   function Entry() {
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
     _classCallCheck(this, Entry);
 
     var ep;
 
     //(1) arguments
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
     if (args.length == 1) {
       ep = args[0];
     } else if (args.length > 1) {
@@ -61,86 +62,17 @@ var Entry = (function () {
     Object.defineProperty(this, "_path", { value: path.normalize(ep), writable: true });
   }
 
+  /**
+   * A file entry.
+   */
+
+  /**
+   * The entry path.
+   *
+   * @type string
+   */
+
   _createClass(Entry, [{
-    key: "path",
-
-    /**
-     * The entry path.
-     *
-     * @type string
-     */
-    get: function () {
-      return this._path;
-    }
-  }, {
-    key: "name",
-
-    /**
-     * Entry name.
-     *
-     * @type string
-     */
-    get: function () {
-      return path.basename(this.path);
-    },
-    set: function (newName) {
-      var newPath;
-
-      //(1) pre: check only name
-      if (newName.indexOf("/") >= 0 || newName.indexOf("\\") >= 0) {
-        throw new Error("The new name contains / or \\. To move, use moveTo().");
-      }
-
-      //(2) rename
-      newPath = path.join(this.parentPath, newName);
-      fs.renameSync(this.path, newPath);
-      this._path = path.normalize(newPath);
-    }
-  }, {
-    key: "parentPath",
-
-    /**
-     * The parent path.
-     *
-     * @type string
-     */
-    get: function () {
-      return path.dirname(this.path);
-    }
-  }, {
-    key: "parent",
-
-    /**
-     * The parent.
-     *
-     * @type Dir
-     */
-    get: function () {
-      return new Dir(this.parentPath);
-    }
-  }, {
-    key: "times",
-
-    /**
-     * The times: modified, change, access and creation.
-     *
-     * @type object
-     */
-    get: function () {
-      var stat;
-
-      //(1) get attributes
-      stat = fs.statSync(this.path);
-
-      //(2) return
-      return {
-        modified: stat.mtime,
-        change: stat.ctime,
-        access: stat.atime,
-        creation: stat.birthtime
-      };
-    }
-  }, {
     key: "exits",
 
     /**
@@ -152,19 +84,17 @@ var Entry = (function () {
     value: function exits() {
       throw new Error("Abstract method.");
     }
-  }, {
-    key: "create",
 
     /**
      * Creates the entry.
      *
      * @abstract
      */
+  }, {
+    key: "create",
     value: function create() {
       throw new Error("Abstract method.");
     }
-  }, {
-    key: "copyTo",
 
     /**
      * Copies to the destination.
@@ -177,14 +107,17 @@ var Entry = (function () {
      * @param name:string       The entry name.
      *
      */
+  }, {
+    key: "copyTo",
     value: function copyTo() {
+      var dst;
+
+      //(1) arguments
+
       for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
         args[_key2] = arguments[_key2];
       }
 
-      var dst;
-
-      //(1) arguments
       if (args.length == 1) {
         dst = args[0];
         if (/[\/\\]$/.test(dst)) dst = path.join(dst, this.name);
@@ -200,8 +133,6 @@ var Entry = (function () {
       //(2) copy
       fsx.copySync(this.path, dst);
     }
-  }, {
-    key: "moveTo",
 
     /**
      * Moves the entry to another location.
@@ -213,14 +144,17 @@ var Entry = (function () {
      * @param parent:string|Dir The parent directory.
      * @param name:string       The entry name.
      */
+  }, {
+    key: "moveTo",
     value: function moveTo() {
+      var dst;
+
+      //(1) arguments
+
       for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
         args[_key3] = arguments[_key3];
       }
 
-      var dst;
-
-      //(1) arguments
       if (args.length == 1) {
         dst = args[0];
         if (/[\/\\]$/.test(dst)) dst = path.join(dst, this.name);
@@ -237,25 +171,96 @@ var Entry = (function () {
       fs.renameSync(this.path, dst);
       this._path = path.normalize(dst);
     }
-  }, {
-    key: "remove",
 
     /**
      * Removes the entry.
      */
+  }, {
+    key: "remove",
     value: function remove() {
       if (this.exists()) fsx.removeSync(this.path);
+    }
+  }, {
+    key: "path",
+    get: function get() {
+      return this._path;
+    }
+
+    /**
+     * Entry name.
+     *
+     * @type string
+     */
+  }, {
+    key: "name",
+    get: function get() {
+      return path.basename(this.path);
+    },
+    set: function set(newName) {
+      var newPath;
+
+      //(1) pre: check only name
+      if (newName.indexOf("/") >= 0 || newName.indexOf("\\") >= 0) {
+        throw new Error("The new name contains / or \\. To move, use moveTo().");
+      }
+
+      //(2) rename
+      newPath = path.join(this.parentPath, newName);
+      fs.renameSync(this.path, newPath);
+      this._path = path.normalize(newPath);
+    }
+
+    /**
+     * The parent path.
+     *
+     * @type string
+     */
+  }, {
+    key: "parentPath",
+    get: function get() {
+      return path.dirname(this.path);
+    }
+
+    /**
+     * The parent.
+     *
+     * @type Dir
+     */
+  }, {
+    key: "parent",
+    get: function get() {
+      return new Dir(this.parentPath);
+    }
+
+    /**
+     * The times: modified, change, access and creation.
+     *
+     * @type object
+     */
+  }, {
+    key: "times",
+    get: function get() {
+      var stat;
+
+      //(1) get attributes
+      stat = fs.statSync(this.path);
+
+      //(2) return
+      return {
+        modified: stat.mtime,
+        change: stat.ctime,
+        access: stat.atime,
+        creation: stat.birthtime
+      };
     }
   }]);
 
   return Entry;
 })();
 
-/**
- * A file entry.
- */
-
 var File = (function (_Entry) {
+  _inherits(File, _Entry);
+
   /**
    * Constructor.
    *
@@ -268,110 +273,26 @@ var File = (function (_Entry) {
    */
 
   function File() {
+    _classCallCheck(this, File);
+
     for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
       args[_key4] = arguments[_key4];
     }
 
-    _classCallCheck(this, File);
-
     _get(Object.getPrototypeOf(File.prototype), "constructor", this).apply(this, args);
   }
 
-  _inherits(File, _Entry);
+  /**
+   * A directory entry.
+   */
+
+  /**
+   * File extension with point.
+   *
+   * @type string
+   */
 
   _createClass(File, [{
-    key: "ext",
-
-    /**
-     * File extension with point.
-     *
-     * @type string
-     */
-    get: function () {
-      return path.extname(this.path);
-    }
-  }, {
-    key: "size",
-
-    /**
-     * Size in bytes.
-     *
-     * @type number
-     */
-    get: function () {
-      return fs.statSync(this.path).size;
-    }
-  }, {
-    key: "text",
-
-    /**
-     * Text content.
-     *
-     * @type string
-     */
-    get: function () {
-      return fs.readFileSync(this.path, "utf8");
-    },
-    set: function (txt) {
-      fs.writeFileSync(this.path, txt, "utf8");
-    }
-  }, {
-    key: "json",
-
-    /**
-     * The file content is a JSON file.
-     *
-     * @type object
-     */
-    get: function () {
-      var con;
-
-      //(1) get object
-      con = fsx.readJsonSync(this.path, { throws: false });
-
-      //(2) return
-      if (typeof con != "object") throw new Error("The '" + this.path + "' file is not a JSON file.");
-      return con;
-    },
-    set: function (obj) {
-      //(1) check
-      if (typeof obj != "object") {
-        throw new Error("" + util.inspect(obj) + " is not an object.");
-      }
-
-      //(2) write
-      fsx.writeJsonSync(this.path, obj);
-    }
-  }, {
-    key: "yaml",
-
-    /**
-     * The file content is a YAML file.
-     *
-     * @type object
-     */
-    get: function () {
-      var con;
-
-      //(1) get con
-      try {
-        con = jsyaml.safeLoad(fs.readFileSync(this.path, "utf8"));
-      } catch (e) {}
-
-      //(2) return
-      if (typeof con != "object") throw new Error("The '" + this.path + "' is not a YAML file.");
-      return con;
-    },
-    set: function (obj) {
-      //(1) check
-      if (typeof obj != "object") {
-        throw new Error("" + util.inspect(obj) + " is not an object.");
-      }
-
-      //(2) write
-      fs.writeFileSync(this.path, jsyaml.safeDump(obj), "utf8");
-    }
-  }, {
     key: "exists",
 
     /**
@@ -380,17 +301,15 @@ var File = (function (_Entry) {
     value: function exists() {
       return fs.existsSync(this.path) && fs.statSync(this.path).isFile();
     }
-  }, {
-    key: "create",
 
     /**
      * @override
      */
+  }, {
+    key: "create",
     value: function create() {
       fs.writeFileSync(this.path, "", "utf8");
     }
-  }, {
-    key: "createFrom",
 
     /**
      * Creates the files with the content of a specified file set.
@@ -398,8 +317,10 @@ var File = (function (_Entry) {
      * @param files:string[]  The files to concatenate.
      * @param [opts]:object   The options: header, separator and footer.
      */
+  }, {
+    key: "createFrom",
     value: function createFrom(files) {
-      var opts = arguments[1] === undefined ? { header: "", separator: "", footer: "" } : arguments[1];
+      var opts = arguments.length <= 1 || arguments[1] === undefined ? { header: "", separator: "", footer: "" } : arguments[1];
 
       //(1) arguments
       if (typeof files == "string") files = [files];
@@ -422,25 +343,111 @@ var File = (function (_Entry) {
 
       if (opts.footer) this.appendText(opts.footer);
     }
-  }, {
-    key: "appendText",
 
     /**
      * Appends a text.
      *
      * @param text:string The text to append.
      */
+  }, {
+    key: "appendText",
     value: function appendText(text) {
       fs.appendFileSync(this.path, text, "utf8");
     }
-  }, {
-    key: "truncate",
 
     /**
      * Truncates the file.
      */
+  }, {
+    key: "truncate",
     value: function truncate() {
       fs.writeFileSync(this.path, "", "utf8");
+    }
+  }, {
+    key: "ext",
+    get: function get() {
+      return path.extname(this.path);
+    }
+
+    /**
+     * Size in bytes.
+     *
+     * @type number
+     */
+  }, {
+    key: "size",
+    get: function get() {
+      return fs.statSync(this.path).size;
+    }
+
+    /**
+     * Text content.
+     *
+     * @type string
+     */
+  }, {
+    key: "text",
+    get: function get() {
+      return fs.readFileSync(this.path, "utf8");
+    },
+    set: function set(txt) {
+      fs.writeFileSync(this.path, txt, "utf8");
+    }
+
+    /**
+     * The file content is a JSON file.
+     *
+     * @type object
+     */
+  }, {
+    key: "json",
+    get: function get() {
+      var con;
+
+      //(1) get object
+      con = fsx.readJsonSync(this.path, { throws: false });
+
+      //(2) return
+      if (typeof con != "object") throw new Error("The '" + this.path + "' file is not a JSON file.");
+      return con;
+    },
+    set: function set(obj) {
+      //(1) check
+      if (typeof obj != "object") {
+        throw new Error(util.inspect(obj) + " is not an object.");
+      }
+
+      //(2) write
+      fsx.writeJsonSync(this.path, obj);
+    }
+
+    /**
+     * The file content is a YAML file.
+     *
+     * @type object
+     */
+  }, {
+    key: "yaml",
+    get: function get() {
+      var con;
+
+      //(1) get con
+      try {
+        con = jsyaml.safeLoad(fs.readFileSync(this.path, "utf8"));
+      } catch (e) {}
+
+      //(2) return
+      if (typeof con != "object") throw new Error("The '" + this.path + "' is not a YAML file.");
+      return con;
+    },
+    set: function set(obj) {
+      //(1) check
+      if (typeof obj != "object") {
+        throw new Error(util.inspect(obj) + " is not an object.");
+      }
+
+      //(2) write
+      fs.writeFileSync(this.path, jsyaml.safeDump(obj), "utf8");
     }
   }]);
 
@@ -449,11 +456,9 @@ var File = (function (_Entry) {
 
 exports.File = File;
 
-/**
- * A directory entry.
- */
-
 var Dir = (function (_Entry2) {
+  _inherits(Dir, _Entry2);
+
   /**
    * Constructor.
    *
@@ -466,26 +471,42 @@ var Dir = (function (_Entry2) {
    */
 
   function Dir() {
+    _classCallCheck(this, Dir);
+
     for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
       args[_key5] = arguments[_key5];
     }
 
-    _classCallCheck(this, Dir);
-
     _get(Object.getPrototypeOf(Dir.prototype), "constructor", this).apply(this, args);
   }
 
-  _inherits(Dir, _Entry2);
+  /**
+   * Directory entries.
+   *
+   * @type Entry[]
+   */
 
   _createClass(Dir, [{
-    key: "entries",
+    key: "exists",
 
     /**
-     * Directory entries.
-     *
-     * @type Entry[]
+     * @override
      */
-    get: function () {
+    value: function exists() {
+      return fs.existsSync(this.path) && fs.statSync(this.path).isDirectory();
+    }
+
+    /**
+     * @override
+     */
+  }, {
+    key: "create",
+    value: function create() {
+      if (!this.exists()) fsx.mkdirpSync(this.path);
+    }
+  }, {
+    key: "entries",
+    get: function get() {
       var res = [];
 
       //(1) get entries
@@ -498,24 +519,6 @@ var Dir = (function (_Entry2) {
 
       //(2) return
       return res;
-    }
-  }, {
-    key: "exists",
-
-    /**
-     * @override
-     */
-    value: function exists() {
-      return fs.existsSync(this.path) && fs.statSync(this.path).isDirectory();
-    }
-  }, {
-    key: "create",
-
-    /**
-     * @override
-     */
-    value: function create() {
-      if (!this.exists()) fsx.mkdirpSync(this.path);
     }
   }]);
 

@@ -1,6 +1,6 @@
 {
   "name": "justo-fs",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Simple object-oriented file system API.",
   "homepage": "http://www.justojs.org",
   "author": {
@@ -22,12 +22,12 @@
     "file system"
   ],
   "bugs": {
-    "url": "https://github.com/justojsx/justo-fs/issues",
+    "url": "https://github.com/justojs/justo-fs/issues",
     "email": "justojs.org@outlook.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/justojsx/justo-fs.git"
+    "url": "https://github.com/justojs/justo-fs.git"
   },
   "engines": {
     "node": ">=0.12.0"
@@ -40,7 +40,6 @@
   "devDependencies": {
     "justo-assert": "*",
     "justo-assert-fs": "*",
-    "justo-assert-childprocess": "*",
     "justo-double": "*",
     "mocha": "*",
     "grunt": "^0.4.5",
