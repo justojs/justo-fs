@@ -1,6 +1,6 @@
 {
   "name": "justo-fs",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Simple object-oriented file system API.",
   "homepage": "http://www.justojs.org",
   "author": {
@@ -40,12 +40,10 @@
   "devDependencies": {
     "justo-assert": "*",
     "justo-assert-fs": "*",
-    "justo-double": "*",
     "mocha": "*",
     "grunt": "^0.4.5",
     "grunt-babel": "*",
     "grunt-contrib-clean": "*",
-    "grunt-contrib-concat": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-jshint": "*",
     "grunt-travis-lint": "*",
