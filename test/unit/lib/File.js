@@ -22,29 +22,18 @@ describe("File", function() {
   });
 
   describe("#constructor()", function() {
-    describe("constructor(path : string)", function() {
-      it("constructor(path)", function() {
-        var f = new File("test/unit/data/a.txt");
+    it("constructor(path)", function() {
+      var f = new File("test/unit/data/a.txt");
 
-        f.path.must.match(/^test.unit.data.a\.txt$/);
-        f.parentPath.must.match(/^test.unit.data$/);
-      });
+      f.path.must.match(/^test.unit.data.a\.txt$/);
+      f.parentPath.must.match(/^test.unit.data$/);
     });
 
-    describe("construtor(dir, name)", function() {
-      it("constructor(dir : string, name : string)", function() {
-        var f = new File("test/unit/data", "a.txt");
+    it("constructor(dir : string, name : string)", function() {
+      var f = new File("test/unit/data", "a.txt");
 
-        f.path.must.match(/^test.unit.data.a\.txt$/);
-        f.parentPath.must.match(/^test.unit.data$/);
-      });
-
-      it("constructor(dir : Dir, name : string)", function() {
-        var f = new File(new Dir("test/unit/data"), "a.txt");
-
-        f.path.must.match(/^test.unit.data.a\.txt$/);
-        f.parentPath.must.match(/^test.unit.data$/);
-      });
+      f.path.must.match(/^test.unit.data.a\.txt$/);
+      f.parentPath.must.match(/^test.unit.data$/);
     });
   });
 

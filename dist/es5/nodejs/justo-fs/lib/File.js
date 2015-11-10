@@ -42,32 +42,11 @@ var _Entry3 = _interopRequireDefault(_Entry2);
 var File = (function (_Entry) {
   _inherits(File, _Entry);
 
-  /**
-   * Constructor.
-   *
-   * @overload
-   * @param(attr) path
-   *
-   * @overload
-   * @param dir:string|Dir  The parent directory.
-   * @param name:string     The file name.
-   */
-
   function File() {
     _classCallCheck(this, File);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _get(Object.getPrototypeOf(File.prototype), "constructor", this).apply(this, args);
+    _get(Object.getPrototypeOf(File.prototype), "constructor", this).apply(this, arguments);
   }
-
-  /**
-   * File extension with point.
-   *
-   * @type string
-   */
 
   _createClass(File, [{
     key: "exists",
@@ -142,6 +121,12 @@ var File = (function (_Entry) {
     }
   }, {
     key: "ext",
+
+    /**
+     * File extension with point.
+     *
+     * @type string
+     */
     get: function get() {
       return _path2["default"].extname(this.path);
     }

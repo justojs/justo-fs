@@ -46,32 +46,11 @@ var _File2 = _interopRequireDefault(_File);
 var Dir = (function (_Entry) {
   _inherits(Dir, _Entry);
 
-  /**
-   * Constructor.
-   *
-   * @overload
-   * @param(attr) path
-   *
-   * @overload
-   * @param parent:string|Dir The parent directory.
-   * @param name:string       The directory name.
-   */
-
   function Dir() {
     _classCallCheck(this, Dir);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _get(Object.getPrototypeOf(Dir.prototype), "constructor", this).apply(this, args);
+    _get(Object.getPrototypeOf(Dir.prototype), "constructor", this).apply(this, arguments);
   }
-
-  /**
-   * Directory entries.
-   *
-   * @type Entry[]
-   */
 
   _createClass(Dir, [{
     key: "exists",
@@ -97,6 +76,12 @@ var Dir = (function (_Entry) {
      */
   }, {
     key: "entries",
+
+    /**
+     * Directory entries.
+     *
+     * @type Entry[]
+     */
     get: function get() {
       var res = [];
 

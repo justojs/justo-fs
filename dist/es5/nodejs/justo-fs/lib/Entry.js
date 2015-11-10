@@ -39,34 +39,12 @@ var Entry = (function () {
    *
    * @overload
    * @param(attr) path
-   *
-   * @overload
-   * @param parent:string The directory parent.
-   * @param name:string   The entry name.
    */
 
   function Entry() {
     _classCallCheck(this, Entry);
 
-    var ep;
-
-    //(1) arguments
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    if (args.length == 1) {
-      ep = args[0];
-    } else if (args.length > 1) {
-      var prnt = args[0];
-      var _name = args[1];
-
-      ep = _path2["default"].join(prnt instanceof _Dir2["default"] ? prnt.path : prnt, _name.toString());
-    }
-
-    //(2) init
-    Object.defineProperty(this, "_path", { value: _path2["default"].normalize(ep), writable: true });
+    Object.defineProperty(this, "_path", { value: _path2["default"].normalize(_path2["default"].join.apply(_path2["default"], arguments)), writable: true });
   }
 
   /**
@@ -117,8 +95,8 @@ var Entry = (function () {
 
       //(1) arguments
 
-      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
       }
 
       if (args.length == 1) {
@@ -126,11 +104,11 @@ var Entry = (function () {
         if (/[\/\\]$/.test(dst)) dst = _path2["default"].join(dst, this.name);
       } else if (args.length > 1) {
         var _parent = args[0];
-        var _name2 = args[1];
+        var _name = args[1];
 
         if (_parent instanceof _Dir2["default"]) _parent = _parent.path;
 
-        dst = _path2["default"].join(_parent, _name2);
+        dst = _path2["default"].join(_parent, _name);
       }
 
       //(2) copy
@@ -154,8 +132,8 @@ var Entry = (function () {
 
       //(1) arguments
 
-      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        args[_key3] = arguments[_key3];
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
       }
 
       if (args.length == 1) {
@@ -163,11 +141,11 @@ var Entry = (function () {
         if (/[\/\\]$/.test(dst)) dst = _path2["default"].join(dst, this.name);
       } else if (args.length > 1) {
         var _parent2 = args[0];
-        var _name3 = args[1];
+        var _name2 = args[1];
 
         if (_parent2 instanceof _Dir2["default"]) _parent2 = _parent2.path;
 
-        dst = _path2["default"].join(_parent2, _name3);
+        dst = _path2["default"].join(_parent2, _name2);
       }
 
       //(2) move

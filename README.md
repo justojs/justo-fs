@@ -19,9 +19,7 @@ The `File` class represents a file.
 To create a `File` instance, we can use the following constructors:
 
 ```
-File(path : string)
-File(parent : string, name : string)
-File(parent : Dir, name : string)
+File(...path)
 ```
 
 Example:
@@ -238,9 +236,7 @@ The `Dir` class represents a directory.
 To create a `Dir` instance, we can use the following constructors:
 
 ```
-Dir(path : string)
-Dir(parent : string, name : string)
-Dir(parent : Dir, name : string)
+Dir(...path)
 ```
 
 Example:
