@@ -8,6 +8,7 @@ Simple object-oriented file system API.
 
 1. [Files](#files)
 2. [Directories](#directories)
+3. [Entries](#entries)
 
 ## Files
 
@@ -320,3 +321,18 @@ Similar to files.
 ### moveTo()
 
 Similar to files.
+
+## Entries
+
+The `justo-fs` package contains several functions for several tasks, independently
+of the entry type:
+
+```
+exists(...path) : boolean
+entry(...path) : File|Dir
+remove(...path)
+```
+
+The `exists()` function returns whether an entry (file or directory) exists.
+The `entry()` function returns an entry as `File` or `Dir`.
+The `remove()` function removes an entry.
