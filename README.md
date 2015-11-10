@@ -323,8 +323,17 @@ of the entry type:
 exists(...path) : boolean
 entry(...path) : File|Dir
 remove(...path)
+copy(src, dst)
 ```
 
 The `exists()` function returns whether an entry (file or directory) exists.
+
 The `entry()` function returns an entry as `File` or `Dir`.
+
 The `remove()` function removes an entry.
+
+The `copy()` function copies a source to destination. Its behavior is as following:
+
+```
+entry(src).copyTo(dst);
+```

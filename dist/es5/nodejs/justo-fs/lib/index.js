@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.exists = exists;
 exports.remove = remove;
 exports.entry = entry;
+exports.copy = copy;
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
 
@@ -96,4 +97,15 @@ function entry() {
 
   //(2) return
   if (stat.isFile()) return new File(ent);else if (stat.isDirectory()) return new Dir(ent);
+}
+
+/**
+ * Copies source to destination.
+ *
+ * @param src:string  The source path.
+ * @param dst:string  The destination.
+ */
+
+function copy(src, dst) {
+  entry(src).copyTo(dst);
 }
