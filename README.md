@@ -187,9 +187,7 @@ truncate()
 Copies the file:
 
 ```
-copyTo(path : string)
-copyTo(parent : string, name : string)
-copyTo(parent : Dir, name :string)
+copyTo(...path)
 ```
 
 If the `path` parameter ends with `/`, the method copies the file to the specified
@@ -209,9 +207,7 @@ f.copyTo("/my/dir", "file.old");  //copy to /my/dir/file.old
 Moves the file to another location:
 
 ```
-moveTo(path : string)
-moveTo(parent : string, name : string)
-moveTo(parent : Dir, name : string)
+moveTo(...path)
 ```
 
 If the `path` parameter ends with `/`, the file is moved to the specified directory.

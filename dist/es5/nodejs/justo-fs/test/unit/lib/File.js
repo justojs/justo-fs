@@ -226,34 +226,30 @@ describe("File", function() {
       dst.remove();
     });
 
-    describe("copyTo(path)", function() {
-      it("copyTo(filePath)", function() {
-        src.copyTo(dst.path);
-        dst.exists().must.be.eq(true);
-        dst.text.must.be.eq(src.text);
-      });
-
-      it("copyTo(dir)", function() {
-        src.copyTo(DST_DIR + path.sep);
-        dst.exists().must.be.eq(true);
-        dst.text.must.be.eq(src.text);
-      });
+    it("copyTo(filePath)", function() {
+      src.copyTo(dst.path);
+      dst.exists().must.be.eq(true);
+      dst.text.must.be.eq(src.text);
     });
 
-    describe("copyTo(parent, name)", function() {
-      it("copyTo(parent : string, name : string)", function() {
-        dst.exists().must.be.eq(false);
-        src.copyTo(DST_DIR, "a.txt");
-        dst.exists().must.be.eq(true);
-        dst.text.must.be.eq(src.text);
-      });
+    it("copyTo(dir)", function() {
+      src.copyTo(DST_DIR + path.sep);
+      dst.exists().must.be.eq(true);
+      dst.text.must.be.eq(src.text);
+    });
 
-      it("copyTo(parent : Dir, name : string)", function() {
-        dst.exists().must.be.eq(false);
-        src.copyTo(new Dir(DST_DIR), "a.txt");
-        dst.exists().must.be.eq(true);
-        dst.text.must.be.eq(src.text);
-      });
+    it("copyTo(parent : string, name : string)", function() {
+      dst.exists().must.be.eq(false);
+      src.copyTo(DST_DIR, "a.txt");
+      dst.exists().must.be.eq(true);
+      dst.text.must.be.eq(src.text);
+    });
+
+    it("copyTo(parent : Dir, name : string)", function() {
+      dst.exists().must.be.eq(false);
+      src.copyTo(new Dir(DST_DIR), "a.txt");
+      dst.exists().must.be.eq(true);
+      dst.text.must.be.eq(src.text);
     });
   });
 
@@ -270,45 +266,41 @@ describe("File", function() {
       f.remove();
     });
 
-    describe("moveTo(path)", function() {
-      it("moveTo(filePath)", function() {
-        f.moveTo(path.join(f.parentPath, "txt.a"));
-        f.parentPath.must.be.eq(DST_DIR);
-        f.name.must.be.eq("txt.a");
-        file(DST_DIR, "a.txt").must.not.exist();
-        f.exists().must.be.eq(true);
-        f.text.must.be.eq(src.text);
-      });
-
-      it("moveTo(dir)", function() {
-        fs.mkdirSync(path.join(DST_DIR, "subdir"));
-        f.moveTo(path.join(DST_DIR, "subdir", path.sep));
-        f.parentPath.must.be.eq(path.join(DST_DIR, "subdir"));
-        f.name.must.be.eq("a.txt");
-        file(DST_DIR, "a.txt").must.not.exist();
-        f.exists().must.be.eq(true);
-        f.text.must.be.eq(src.text);
-      });
+    it("moveTo(filePath)", function() {
+      f.moveTo(path.join(f.parentPath, "txt.a"));
+      f.parentPath.must.be.eq(DST_DIR);
+      f.name.must.be.eq("txt.a");
+      file(DST_DIR, "a.txt").must.not.exist();
+      f.exists().must.be.eq(true);
+      f.text.must.be.eq(src.text);
     });
 
-    describe("moveTo(parent, name)", function() {
-      it("moveTo(parent : string, name : string)", function() {
-        f.moveTo(DST_DIR, "b.txt");
-        f.parentPath.must.be.eq(DST_DIR);
-        f.name.must.be.eq("b.txt");
-        file(DST_DIR, "a.txt").must.not.exist();
-        f.exists().must.be.eq(true);
-        f.text.must.be.eq(src.text);
-      });
+    it("moveTo(dir)", function() {
+      fs.mkdirSync(path.join(DST_DIR, "subdir"));
+      f.moveTo(path.join(DST_DIR, "subdir", path.sep));
+      f.parentPath.must.be.eq(path.join(DST_DIR, "subdir"));
+      f.name.must.be.eq("a.txt");
+      file(DST_DIR, "a.txt").must.not.exist();
+      f.exists().must.be.eq(true);
+      f.text.must.be.eq(src.text);
+    });
 
-      it("moveTo(parent : Dir, name : string)", function() {
-        f.moveTo(new Dir(DST_DIR), "b.txt");
-        f.parentPath.must.be.eq(DST_DIR);
-        f.name.must.be.eq("b.txt");
-        file(DST_DIR, "a.txt").must.not.exist();
-        f.exists().must.be.eq(true);
-        f.text.must.be.eq(src.text);
-      });
+    it("moveTo(parent : string, name : string)", function() {
+      f.moveTo(DST_DIR, "b.txt");
+      f.parentPath.must.be.eq(DST_DIR);
+      f.name.must.be.eq("b.txt");
+      file(DST_DIR, "a.txt").must.not.exist();
+      f.exists().must.be.eq(true);
+      f.text.must.be.eq(src.text);
+    });
+
+    it("moveTo(parent : Dir, name : string)", function() {
+      f.moveTo(new Dir(DST_DIR), "b.txt");
+      f.parentPath.must.be.eq(DST_DIR);
+      f.name.must.be.eq("b.txt");
+      file(DST_DIR, "a.txt").must.not.exist();
+      f.exists().must.be.eq(true);
+      f.text.must.be.eq(src.text);
     });
   });
 

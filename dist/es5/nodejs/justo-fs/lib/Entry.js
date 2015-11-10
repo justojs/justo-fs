@@ -44,7 +44,15 @@ var Entry = (function () {
   function Entry() {
     _classCallCheck(this, Entry);
 
-    Object.defineProperty(this, "_path", { value: _path2["default"].normalize(_path2["default"].join.apply(_path2["default"], arguments)), writable: true });
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    //(1) arguments
+    for (var i = 0; i < args.length; ++i) {
+      args[i] = args[i].toString();
+    } //(2) this
+    Object.defineProperty(this, "_path", { value: _path2["default"].normalize(_path2["default"].join.apply(_path2["default"], args)), writable: true });
   }
 
   /**
@@ -80,12 +88,7 @@ var Entry = (function () {
     /**
      * Copies to the destination.
      *
-     * @overload Using a path.
      * @param dst:string  The destination path.
-     *
-     * @overload Using a parent directory and an entry name.
-     * @param parent:string|Dir The parent directory.
-     * @param name:string       The entry name.
      *
      */
   }, {
@@ -95,21 +98,14 @@ var Entry = (function () {
 
       //(1) arguments
 
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
       }
 
-      if (args.length == 1) {
-        dst = args[0];
-        if (/[\/\\]$/.test(dst)) dst = _path2["default"].join(dst, this.name);
-      } else if (args.length > 1) {
-        var _parent = args[0];
-        var _name = args[1];
-
-        if (_parent instanceof _Dir2["default"]) _parent = _parent.path;
-
-        dst = _path2["default"].join(_parent, _name);
-      }
+      for (var i = 0; i < args.length; ++i) {
+        args[i] = args[i].toString();
+      }dst = _path2["default"].join.apply(_path2["default"], args);
+      if (/[\/\\]$/.test(dst)) dst = _path2["default"].join(dst, this.name);
 
       //(2) copy
       _fsExtra2["default"].copySync(this.path, dst);
@@ -118,12 +114,7 @@ var Entry = (function () {
     /**
      * Moves the entry to another location.
      *
-     * @overload Using a path.
      * @param dst:string  The new location.
-     *
-     * @overload Using a parent directory and an entry name.
-     * @param parent:string|Dir The parent directory.
-     * @param name:string       The entry name.
      */
   }, {
     key: "moveTo",
@@ -132,21 +123,14 @@ var Entry = (function () {
 
       //(1) arguments
 
-      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
+      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
       }
 
-      if (args.length == 1) {
-        dst = args[0];
-        if (/[\/\\]$/.test(dst)) dst = _path2["default"].join(dst, this.name);
-      } else if (args.length > 1) {
-        var _parent2 = args[0];
-        var _name2 = args[1];
-
-        if (_parent2 instanceof _Dir2["default"]) _parent2 = _parent2.path;
-
-        dst = _path2["default"].join(_parent2, _name2);
-      }
+      for (var i = 0; i < args.length; ++i) {
+        args[i] = args[i].toString();
+      }dst = _path2["default"].join.apply(_path2["default"], args);
+      if (/[\/\\]$/.test(dst)) dst = _path2["default"].join(dst, this.name);
 
       //(2) move
       _fs2["default"].renameSync(this.path, dst);
@@ -160,6 +144,15 @@ var Entry = (function () {
     key: "remove",
     value: function remove() {
       if (this.exists()) _fsExtra2["default"].removeSync(this.path);
+    }
+
+    /**
+     * @override
+     */
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.path;
     }
   }, {
     key: "path",
