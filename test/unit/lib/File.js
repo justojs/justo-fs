@@ -359,11 +359,76 @@ describe("File", function() {
       f.remove();
     });
 
-    it("create()", function() {
+    it("create() - file not existing", function() {
       f.exists().must.be.eq(false);
-      f.create();
+
+      f.create().must.be.eq(true);
       f.exists().must.be.eq(true);
       f.size.must.be.eq(0);
+    });
+
+    it("create() - file existing", function() {
+      f.exists().must.be.eq(false);
+      f.create({content: "The content is this."});
+      f.exists().must.be.eq(true);
+      f.size.must.be.gt(0);
+
+      f.create().must.be.eq(true);
+      f.size.must.be.eq(0);
+    });
+
+    it("create({overwrite : false}) - file not existing", function() {
+      f.exists().must.be.eq(false);
+
+      f.create({overwrite: false}).must.be.eq(true);
+      f.exists().must.be.eq(true);
+      f.size.must.be.eq(0);
+    });
+
+    it("create({overwrite : false}) - file existing", function() {
+      f.exists().must.be.eq(false);
+      f.create({content: "The content is this."});
+      f.exists().must.be.eq(true);
+      f.size.must.be.gt(0);
+
+      f.create({overwrite: false}).must.be.eq(false);
+      f.text.must.be.eq("The content is this.");
+    });
+
+    it("create({content : string})", function() {
+      f.exists().must.be.eq(false);
+
+      f.create({content: "The content is this."}).must.be.eq(true);
+      f.exists().must.be.eq(true);
+      f.text.must.be.eq("The content is this.");
+    });
+
+    it("create({content : object})", function() {
+      f.exists().must.be.eq(false);
+
+      f.create({content: {x: 1, y: 2}}).must.be.eq(true);
+      f.exists().must.be.eq(true);
+      f.json.must.be.eq({x: 1, y: 2});
+    });
+
+    it("create({content : string, overwrite: false})", function() {
+      f.exists().must.be.eq(false);
+      f.create({content: "ABC."});
+      f.exists().must.be.eq(true);
+
+      f.create({overwrite: false, content: "The content is this."}).must.be.eq(false);
+      f.exists().must.be.eq(true);
+      f.text.must.be.eq("ABC.");
+    });
+
+    it("create({content : object, overwrite: false})", function() {
+      f.exists().must.be.eq(false);
+      f.create({content: "ABC."});
+      f.exists().must.be.eq(true);
+
+      f.create({overwrite: false, content: {x: 1, y: 2}}).must.be.eq(false);
+      f.exists().must.be.eq(true);
+      f.text.must.be.eq("ABC.");
     });
   });
 

@@ -127,14 +127,26 @@ If the entry exists but it is not a file, it returns false.
 Creates the file:
 
 ```
-create()
+create() : boolean
+create(opts) : boolean
 ```
 
-Example:
+The method returns if the file has been created.
+
+The `opts` parameter can have the following properties:
+
+- `overwrite` (boolean). Must the file be overwritten whether it exists? `true`, yep; `false`, nope. Default: `true`.
+- `content` (string or object). The file content. If an object is passed, this is transformed to JSON.
+
+Examples:
 
 ```
 f = new File("/my/dir", "file.txt");
+
 f.create();
+f.create({overwrite: false});
+f.create({overwrite: false, content: "The content."});
+f.create({overwrite: false, content: {x: 1, y: 2}});
 ```
 
 ### createFrom()
