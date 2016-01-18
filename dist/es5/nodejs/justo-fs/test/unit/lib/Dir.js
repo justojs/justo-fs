@@ -46,7 +46,6 @@ describe("Dir", function() {
     });
   });
 
-
   describe("#name", function() {
     var src, dst;
 
@@ -259,9 +258,16 @@ describe("Dir", function() {
       d.remove();
     });
 
-    it("create()", function() {
+    it("create() - not existing", function() {
       d.exists().must.be.eq(false);
+      d.create().must.be.eq(true);
+      d.exists().must.be.eq(true);
+    });
+
+    it("create() - existing", function() {
       d.create();
+      d.exists().must.be.eq(true);
+      d.create().must.be.eq(false);
       d.exists().must.be.eq(true);
     });
   });

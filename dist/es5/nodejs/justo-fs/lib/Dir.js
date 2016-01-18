@@ -68,7 +68,20 @@ var Dir = (function (_Entry) {
   }, {
     key: "create",
     value: function create() {
-      if (!this.exists()) _fsExtra2["default"].mkdirpSync(this.path);
+      var res;
+
+      //(1) create
+      res = false;
+
+      if (!this.exists()) {
+        try {
+          _fsExtra2["default"].mkdirpSync(this.path);
+          res = true;
+        } catch (e) {}
+      }
+
+      //(2) return
+      return res;
     }
 
     /**

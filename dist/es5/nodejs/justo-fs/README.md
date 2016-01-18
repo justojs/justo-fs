@@ -290,8 +290,10 @@ dir = new Dir(Dir.TMP_DIR, "mydir");
 Creates the directory:
 
 ```
-create()
+create() : boolean
 ```
+
+The method returns if the directory has been created.
 
 Example:
 
