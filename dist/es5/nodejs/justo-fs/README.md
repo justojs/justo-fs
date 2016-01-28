@@ -335,18 +335,22 @@ of the entry type:
 
 ```
 exists(...path) : boolean
-entry(...path) : File|Dir
+entry(...path) : File|Dir|undefined
 remove(...path)
 copy(src, dst)
+rename(from, to) : boolean
 ```
 
 The `exists()` function returns whether an entry (file or directory) exists.
 
-The `entry()` function returns an entry as `File` or `Dir`.
+The `entry()` function returns an entry as `File` or `Dir`. If the entry doesn't existe,
+it returns `undefined`.
 
 The `remove()` function removes an entry.
 
 The `copy()` function copies a source to destination. Its behavior is as following:
+
+The `rename()` function renames an entry.
 
 ```
 entry(src).copyTo(dst);
