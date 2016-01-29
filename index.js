@@ -2,10 +2,11 @@
 import fs from "fs";
 import * as fsx from "fs-extra";
 import path from "path";
+import Dir from "./lib/Dir";
+import File from "./lib/File";
 
 //API
-export const Dir = require("./Dir");
-export const File = require("./File");
+export {File, Dir};
 
 /**
  * Checks if a file system entry exists.

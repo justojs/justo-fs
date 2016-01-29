@@ -1,17 +1,17 @@
 {
   "name": "justo-fs",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Simple object-oriented file system API.",
   "homepage": "http://www.justojs.org",
   "author": {
-    "name": "The Justo.js Development Group",
-    "email": "justojs.org@outlook.com",
+    "name": "JustoLabs",
+    "email": "justojs@justolabs.com",
     "url": "http://www.justojs.org"
   },
   "contributors": [
     {
       "name": "Raúl G. González",
-      "email": "raulggonzalezsw@outlook.com",
+      "email": "raulggonzalez@justojs.org",
       "url": ""
     }
   ],
@@ -23,7 +23,7 @@
   ],
   "bugs": {
     "url": "https://github.com/justojs/justo-fs/issues",
-    "email": "justojs.org@outlook.com"
+    "email": "issues@justojs.org"
   },
   "repository": {
     "type": "git",
@@ -38,25 +38,24 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "justo-assert": "*",
-    "justo-assert-fs": "*",
-    "mocha": "*",
+    "babel-preset-es2015": "*",
     "grunt": "^0.4.5",
-    "grunt-babel": "^5",
+    "grunt-babel": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-jshint": "*",
     "grunt-travis-lint": "*",
-    "grunt-mocha-test": "*"
+    "grunt-mocha-test": "*",
+    "justo-assert": "*",
+    "justo-assert-fs": "*",
+    "mocha": "*"
   },
   "preferGlobal": false,
-  "main": "lib/index.js",
+  "main": "index.js",
   "files": [
-    "lib",
-    "test"
+    "lib"
   ],
   "scripts": {
     "test": "grunt test"
-  },
-  "license": "MIT"
+  }
 }

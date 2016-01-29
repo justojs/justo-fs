@@ -1,6 +1,6 @@
 //imports
 const assert = require("assert");
-const fs = require("../../../dist/es5/nodejs/justo-fs");
+const fs = require("../../dist/es5/nodejs/justo-fs");
 const File = fs.File;
 const Dir = fs.Dir;
 
