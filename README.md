@@ -279,10 +279,13 @@ To know the temporary directory, we can use the static attribute:
 TMP_DIR : string
 ```
 
+We can use the `TMP` alias.
+
 Example:
 
 ```
 dir = new Dir(Dir.TMP_DIR, "mydir");
+dir = new Dir(Dir.TMP, "mydir");
 ```
 
 ### create()
@@ -299,6 +302,27 @@ Example:
 
 ```
 dir = new Dir(Dir.TMP_DIR, "mydir");
+dir.create();
+```
+
+### createTmpDir()
+
+Create a temporary directory:
+
+```
+createTmpDir() : Dir
+createTmpDir(subdir : string) : Dir
+```
+
+This method is similar to:
+
+```
+//Dir.createTmpDir()
+dir = new Dir(Dir.TMP, Date.now().toString());
+dir.create();
+
+//Dir.createTmpDir(subdir)
+dir = new Dir(Dir.TMP, subdir);
 dir.create();
 ```
 

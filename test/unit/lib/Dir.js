@@ -277,4 +277,27 @@ describe("Dir", function() {
       Dir.TMP_DIR.must.be.instanceOf(String);
     });
   });
+
+  describe("#createTmpDir()", function() {
+    it("createTmpDir()", function() {
+      var dir = Dir.createTmpDir();
+
+      dir.must.be.instanceOf(Dir);
+      dir.exists().must.be.eq(true);
+      dir.name.must.match(/[0-9]+/);
+
+      dir.remove();
+    });
+
+    it("createTmpDir(subdir)", function() {
+      var name = Date.now().toString();
+      var dir = Dir.createTmpDir(name);
+
+      dir.must.be.instanceOf(Dir);
+      dir.exists().must.be.eq(true);
+      dir.name.must.be.eq(name);
+
+      dir.remove();
+    });
+  });
 });
