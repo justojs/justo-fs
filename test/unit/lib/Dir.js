@@ -101,7 +101,7 @@ describe("Dir", function() {
     it("entries : Entry[]", function() {
       var ee = dst.entries;
 
-      ee.length.must.be.eq(5);
+      ee.length.must.be.eq(6);
 
       for (var i = 0; i < ee.length; ++i) {
         var entry = ee[i];
@@ -166,7 +166,15 @@ describe("Dir", function() {
       dst.exists().must.be.eq(false);
       src.copyTo(new Dir(DST_DIR), "data");
       dst.exists().must.be.eq(true);
-      dir(dst.path).must.have(["a.txt", "b.txt", "file.json", "file.yml"]);
+      dir(dst.path).must.have(["a.txt", "b.txt", "file.json", "file.yml", "ignore"]);
+      dir(dst.path, "ignore").must.have(["c.txt"]);
+    });
+
+    it("copyTo({path, ignore : string})", function() {
+      src.copyTo({path: dst.path, ignore: path.join(SRC_DIR, "ignore")});
+      dst.exists().must.be.eq(true);
+      dir(dst.path).must.have(["a.txt", "b.txt", "file.json", "file.yml", "ignore"]);
+      dir(dst.path, "ignore").must.not.have("c.txt");
     });
   });
 

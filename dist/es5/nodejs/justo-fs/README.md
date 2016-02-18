@@ -346,7 +346,20 @@ If the entry exists but it is not a directory, it returns false.
 
 ### copyTo()
 
-Similar to files.
+Copy the directory:
+
+```
+copyTo(...path : string[])
+copyTo({path : string, ignore : string})
+copyTo({path : string, ignore : string[]})
+```
+
+Example:
+
+```
+dir = new Dir("app/");
+dir.copyTo({path: "dist/", ignore: "app/styles/"})
+```
 
 ### moveTo()
 
