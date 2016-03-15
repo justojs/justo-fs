@@ -489,4 +489,22 @@ describe("File", function() {
       f.text.must.be.eq("The a.txt file.\nAppended text.");
     });
   });
+
+  describe("#replacePath()", function() {
+    it("replacePath(base)", function() {
+      new File(SRC_DIR, "a.txt").replacePath(SRC_DIR).must.be.eq("a.txt");
+    });
+
+    it("replacePath(base)", function() {
+      new File(SRC_DIR, "a.txt").replacePath("test/unit/").must.match(/^data.a\.txt$/);
+    });
+
+    it("replacePath(base) - file as Linux, replace as Windows", function() {
+      new File("test/unit/data/a.txt").replacePath("test\\unit\\").must.match(/^data.a\.txt$/);
+    });
+
+    it("replacePath(base) - file as Windows, replace as Linux", function() {
+      new File("test\\unit\\data\\a.txt").replacePath("test/unit/").must.match(/^data.a\.txt$/);
+    });
+  });
 });

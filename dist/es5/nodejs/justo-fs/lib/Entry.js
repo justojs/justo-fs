@@ -1,8 +1,8 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _fs = require("fs");var _fs2 = _interopRequireDefault(_fs);var _fsExtra = require("fs-extra");var _fsExtra2 = _interopRequireDefault(_fsExtra);var _path = require("path");var _path2 = _interopRequireDefault(_path);var _Dir = require("./Dir");var _Dir2 = _interopRequireDefault(_Dir);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
-
-
-
-
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+var _fs = require("fs");var _fs2 = _interopRequireDefault(_fs);
+var _fsExtra = require("fs-extra");var _fsExtra2 = _interopRequireDefault(_fsExtra);
+var _path = require("path");var _path2 = _interopRequireDefault(_path);
+var _Dir = require("./Dir");var _Dir2 = _interopRequireDefault(_Dir);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
 
 
 
@@ -21,7 +21,7 @@ Entry = function () {
     for (var i = 0; i < args.length; ++i) {args[i] = args[i].toString();}
 
 
-    Object.defineProperty(this, "_path", { value: _path2.default.normalize(_path2.default.join.apply(_path2.default, args)), writable: true });}_createClass(Entry, [{ key: "exits", value: function exits() 
+    Object.defineProperty(this, "_path", { value: _path2.default.normalize(_path2.default.join.apply(_path2.default, args)), writable: true });}_createClass(Entry, [{ key: "replacePath", value: function replacePath(
 
 
 
@@ -72,6 +72,18 @@ Entry = function () {
 
 
 
+
+
+
+
+
+
+
+
+
+    which) {var by = arguments.length <= 1 || arguments[1] === undefined ? "" : arguments[1];
+      var re = /[\\/]/g;
+      return this.path.replace(re, _path2.default.sep).replace(_path2.default.normalize(which.replace(re, _path2.default.sep)), by);} }, { key: "exits", value: function exits() 
 
 
 

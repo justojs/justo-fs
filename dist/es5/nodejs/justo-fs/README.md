@@ -65,6 +65,22 @@ f.name = "file.old";
 console.log(f.name);  //now: file.old
 ```
 
+### Replacing partial path
+
+To replace a partial path, we can use the `replace()` method:
+
+```
+replacePath(path) : string
+```
+
+Example:
+
+```
+var f = new File("/my/dir/file.txt");
+var path = f.replacePath("/my/dir");  //path = "/file.txt" and f = "/my/dir/file.txt"
+var path = f.replacePath("/my/dir/"); //path = "file.txt" and f = "/my/dir/file.txt"
+```
+
 ### Content
 
 To get the content, we can use the properties: `text`, `json` or `yaml`.
