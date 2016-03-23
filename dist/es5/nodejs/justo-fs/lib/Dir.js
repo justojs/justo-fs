@@ -9,7 +9,7 @@ var _File = require("./File");var _File2 = _interopRequireDefault(_File);functio
 
 
 
-Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(this, Dir);return _possibleConstructorReturn(this, Object.getPrototypeOf(Dir).apply(this, arguments));}_createClass(Dir, [{ key: "exists", value: function exists() 
+Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(this, Dir);return _possibleConstructorReturn(this, Object.getPrototypeOf(Dir).apply(this, arguments));}_createClass(Dir, [{ key: "file", value: function file(
 
 
 
@@ -29,6 +29,26 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
 
+
+
+
+
+
+
+
+
+    path) {
+      return new _File2.default(this.path, path);} }, { key: "dir", value: function dir(
+
+
+
+
+
+
+
+
+    path) {
+      return new Dir(this.path, path);} }, { key: "exists", value: function exists() 
 
 
 

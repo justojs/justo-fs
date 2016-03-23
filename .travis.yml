@@ -12,6 +12,7 @@ node_js:
   - 5.6
   - 5.7
   - 5.8
+  - 5.9
 sudo: false
 before_install: npm install -g grunt-cli
 install: npm install

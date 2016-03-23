@@ -283,6 +283,23 @@ times : object        //the times: modified, change, access, creation
 entries : Entry[]     //the directory entries
 ```
 
+### file() and dir()
+
+If we need to get an entry as `File` or `Dir`, we can use:
+
+```
+file(subpath : string) : File
+dir(subpath : string) : Dir
+```
+
+Example:
+
+```
+var dir = new Dir("/dir");
+dir.file("file.txt");       //new File(dir.path, "file.txt");
+dir.dir("dir");             //new Dir(dir.path, "dir");
+```
+
 ### Renaming
 
 Similar to files, using the `name` property.

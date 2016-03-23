@@ -114,6 +114,22 @@ describe("Dir", function() {
     });
   });
 
+  describe("#file()", function() {
+    it("file(subpath)", function() {
+      var dir = new Dir(SRC_DIR);
+      var file = dir.file("file.txt");
+      file.must.be.instanceOf("File");
+    });
+  });
+
+  describe("#dir()", function() {
+    it("dir(subpath)", function() {
+      var dir = new Dir(SRC_DIR);
+      var subdir = dir.dir("subdir");
+      subdir.must.be.instanceOf("Dir");
+    });
+  });
+
   describe("#exists()", function() {
     it("exists() : true", function() {
       var d = new Dir(SRC_DIR);
