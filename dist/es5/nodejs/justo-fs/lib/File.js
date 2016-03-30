@@ -172,22 +172,40 @@ File = function (_Entry) {_inherits(File, _Entry);function File() {_classCallChe
 
 
 
-    text, line) {
-      if (line === undefined) {
+
+
+
+
+    text, opts) {
+
+      if (typeof opts == "undefined") opts = {};else 
+      if (typeof opts == "number") opts = { line: opts };
+
+
+      if (typeof opts.line === "undefined" || this.text === "") {
         _fs2.default.appendFileSync(this.path, text, "utf8");} else 
       {
-        var content = this.text.split("\n");
+        var content = this.text;
+        var line = opts.line;
+        var type = opts.type || "start";
+        var eol = this.text.indexOf("\r") >= 0 ? "\r\n" : "\n";
+        var ca = this.text.split(eol);
 
-        if (line < 0) line += content.length;
+        if (line < 0) line += ca.length;
 
-        if (line <= 0) {
-          this.text = text + content.join("\n");} else 
-        if (line >= content.length) {
+        if (line < 0) {
+          this.text = text + content;} else 
+        if (line === 0) {
+          if (type == "start") this.text = text + content;else 
+          this.text = ca[0] + text + eol + ca.slice(1).join(eol);} else 
+        if (line + 1 >= ca.length) {
           this.appendText(text);} else 
         {
-          this.text = content.slice(0, line).join("\n") + "\n" + 
-          text + 
-          content.slice(line).join("\n");}}} }, { key: "truncate", value: function truncate() 
+          if (type == "start") {
+            this.text = ca.slice(0, line).join(eol) + eol + text + ca.slice(line).join(eol);} else 
+          {
+            this.text = ca.slice(0, line + 1).join(eol) + text + eol + ca.slice(line + 1).join(eol);}}}} }, { key: "truncate", value: function truncate() 
+
 
 
 

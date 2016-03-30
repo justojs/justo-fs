@@ -193,6 +193,7 @@ Appends a text at the end of the file or a given number of line:
 ```
 f.appendText(text : string)
 f.appendText(text : string, ln : number)
+f.appendText(text : string, opts : {line: number, type: "start|end"})
 ```
 
 ### remove()

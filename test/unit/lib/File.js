@@ -499,8 +499,23 @@ describe("File", function() {
         f = new File(DST_DIR, "append.txt");
       });
 
+      it("appendText(text, 0)", function() {
+        f.appendText("hi", 0);
+        f.text.must.be.eq("hizero\none\ntwo\nthree\n");
+      });
+
+      it("appendText(text, {line: 0, type: \"end\"})", function() {
+        f.appendText("hi", {line: 0, type: "end"});
+        f.text.must.be.eq("zerohi\none\ntwo\nthree\n");
+      });
+
       it("appendText(text, -1)", function() {
         f.appendText("hi", -1);
+        f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
+      });
+
+      it("appendText(text, {line: -1, type: \"end\"})", function() {
+        f.appendText("hi", {line: -1, type: "end"});
         f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
       });
 
@@ -509,9 +524,19 @@ describe("File", function() {
         f.text.must.be.eq("zero\none\ntwo\nhithree\n");
       });
 
+      it("appendText(text, {line: -2, type: \"end)", function() {
+        f.appendText("hi", {line: -2, type: "end"});
+        f.text.must.be.eq("zero\none\ntwo\nthreehi\n");
+      });
+
       it("appendText(text, -3)", function() {
         f.appendText("hi", -3);
         f.text.must.be.eq("zero\none\nhitwo\nthree\n");
+      });
+
+      it("appendText(text, {line: -3, type: \"end\"})", function() {
+        f.appendText("hi", {line: -3, type: "end"});
+        f.text.must.be.eq("zero\none\ntwohi\nthree\n");
       });
 
       it("appendText(text, -5)", function() {
@@ -519,13 +544,18 @@ describe("File", function() {
         f.text.must.be.eq("hizero\none\ntwo\nthree\n");
       });
 
+      it("appendText(text, {line: -5, type: \"end\"})", function() {
+        f.appendText("hi", {line: -5, type: "end"});
+        f.text.must.be.eq("zerohi\none\ntwo\nthree\n");
+      });
+
       it("appendText(text, -10)", function() {
         f.appendText("hi", -10);
         f.text.must.be.eq("hizero\none\ntwo\nthree\n");
       });
 
-      it("appendText(text, 0)", function() {
-        f.appendText("hi", 0);
+      it("appendText(text, {line: -10, type: \"end\"})", function() {
+        f.appendText("hi", {line: -10, type: "end"});
         f.text.must.be.eq("hizero\none\ntwo\nthree\n");
       });
 
@@ -534,9 +564,19 @@ describe("File", function() {
         f.text.must.be.eq("zero\nhione\ntwo\nthree\n");
       });
 
+      it("appendText(text, {line: 1, type: \"end\"})", function() {
+        f.appendText("hi", {line: 1, type: "end"});
+        f.text.must.be.eq("zero\nonehi\ntwo\nthree\n");
+      });
+
       it("appendText(text, 2)", function() {
         f.appendText("hi", 2);
         f.text.must.be.eq("zero\none\nhitwo\nthree\n");
+      });
+
+      it("appendText(text, {line: 2, type: \"end\"})", function() {
+        f.appendText("hi", {line: 2, type: "end"});
+        f.text.must.be.eq("zero\none\ntwohi\nthree\n");
       });
 
       it("appendText(text, 3)", function() {
@@ -544,8 +584,18 @@ describe("File", function() {
         f.text.must.be.eq("zero\none\ntwo\nhithree\n");
       });
 
+      it("appendText(text, {line: 3, type: \"end\"})", function() {
+        f.appendText("hi", {line: 3, type: "end"});
+        f.text.must.be.eq("zero\none\ntwo\nthreehi\n");
+      });
+
       it("appendText(text, 4)", function() {
         f.appendText("hi", 4);
+        f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
+      });
+
+      it("appendText(text, {line: 4, type: \"end\"})", function() {
+        f.appendText("hi", {line: 4, type: "end"});
         f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
       });
 
@@ -554,8 +604,18 @@ describe("File", function() {
         f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
       });
 
+      it("appendText(text, {line: 5, type: \"end\"})", function() {
+        f.appendText("hi", {line: 5, type: "end"});
+        f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
+      });
+
       it("appendText(text, 6)", function() {
         f.appendText("hi", 6);
+        f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
+      });
+
+      it("appendText(text, {line: 6, type: \"end\"})", function() {
+        f.appendText("hi", {line: 6, type: "end"});
         f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
       });
     });
