@@ -114,6 +114,18 @@ describe("Dir", function() {
     });
   });
 
+  describe("#files", function() {
+    var dir;
+
+    beforeEach(function() {
+      dir = new Dir(SRC_DIR);
+    });
+
+    it("files : File[]", function() {
+      dir.files.length.must.be.eq(5);
+    });
+  });
+
   describe("#file()", function() {
     it("file(subpath)", function() {
       var dir = new Dir(SRC_DIR);

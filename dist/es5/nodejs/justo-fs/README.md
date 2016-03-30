@@ -283,6 +283,7 @@ parent : Dir          //the parent directory
 parentPath : string   //the parent directory path
 times : object        //the times: modified, change, access, creation
 entries : Entry[]     //the directory entries
+files : File[]        //the directory files
 ```
 
 ### file() and dir()

@@ -37,6 +37,26 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     path) {
       return new _File2.default(this.path, path);} }, { key: "dir", value: function dir(
 
@@ -125,7 +145,7 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
             _get(Object.getPrototypeOf(Dir.prototype), "copyTo", _this2).call(_this2, dst);}})();} else 
 
       {var _get2;
-        (_get2 = _get(Object.getPrototypeOf(Dir.prototype), "copyTo", this)).call.apply(_get2, [this].concat(args));}} }, { key: "entries", get: function get() {var res = [];for (var i = 0, items = _fs2.default.readdirSync(this.path); i < items.length; ++i) {var item = items[i];var stats = _fs2.default.statSync(_path2.default.join(this.path, item));if (stats.isFile()) res.push(new _File2.default(this.path, item));else if (stats.isDirectory()) res.push(new Dir(this.path, item));}return res;} }], [{ key: "createTmpDir", value: function createTmpDir() 
+        (_get2 = _get(Object.getPrototypeOf(Dir.prototype), "copyTo", this)).call.apply(_get2, [this].concat(args));}} }, { key: "entries", get: function get() {var res = [];for (var i = 0, items = _fs2.default.readdirSync(this.path); i < items.length; ++i) {var item = items[i];var stats = _fs2.default.statSync(_path2.default.join(this.path, item));if (stats.isFile()) res.push(new _File2.default(this.path, item));else if (stats.isDirectory()) res.push(new Dir(this.path, item));}return res;} }, { key: "files", get: function get() {var res = [];for (var i = 0, items = _fs2.default.readdirSync(this.path); i < items.length; ++i) {var item = items[i];var stats = _fs2.default.statSync(_path2.default.join(this.path, item));if (stats.isFile()) res.push(new _File2.default(this.path, item));}return res;} }], [{ key: "createTmpDir", value: function createTmpDir() 
 
 
 
