@@ -101,11 +101,11 @@ describe("Dir", function() {
     it("entries : Entry[]", function() {
       var ee = dst.entries;
 
-      ee.length.must.be.eq(6);
+      ee.length.must.be.eq(7);
 
       for (var i = 0; i < ee.length; ++i) {
         var entry = ee[i];
-        if (["a.txt", "b.txt", "file.json", "file.yml"].indexOf(entry.name) >= 0) {
+        if (["a.txt", "append.txt", "b.txt", "file.json", "file.yml"].indexOf(entry.name) >= 0) {
           entry.must.be.instanceOf(File);
         } else {
           entry.must.be.instanceOf(Dir);

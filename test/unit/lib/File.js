@@ -473,20 +473,91 @@ describe("File", function() {
   describe("#appendText()", function() {
     var src, f;
 
-    beforeEach(function() {
-      src = new File(SRC_DIR, "a.txt");
-      src.copyTo(DST_DIR, "a.txt");
-
-      f = new File(DST_DIR, "a.txt");
-    });
-
     afterEach(function() {
       f.remove();
     });
 
-    it("appendText(text)", function() {
-      f.appendText("Appended text.");
-      f.text.must.be.eq("The a.txt file.\nAppended text.");
+    describe("In the end", function() {
+      beforeEach(function() {
+        src = new File(SRC_DIR, "a.txt");
+        src.copyTo(DST_DIR, "a.txt");
+
+        f = new File(DST_DIR, "a.txt");
+      });
+
+      it("appendText(text)", function() {
+        f.appendText("Appended text.");
+        f.text.must.be.eq("The a.txt file.\nAppended text.");
+      });
+    });
+
+    describe("In a given line", function() {
+      beforeEach(function() {
+        src = new File(SRC_DIR, "append.txt");
+        src.copyTo(DST_DIR, "append.txt");
+
+        f = new File(DST_DIR, "append.txt");
+      });
+
+      it("appendText(text, -1)", function() {
+        f.appendText("hi", -1);
+        f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
+      });
+
+      it("appendText(text, -2)", function() {
+        f.appendText("hi", -2);
+        f.text.must.be.eq("zero\none\ntwo\nhithree\n");
+      });
+
+      it("appendText(text, -3)", function() {
+        f.appendText("hi", -3);
+        f.text.must.be.eq("zero\none\nhitwo\nthree\n");
+      });
+
+      it("appendText(text, -5)", function() {
+        f.appendText("hi", -5);
+        f.text.must.be.eq("hizero\none\ntwo\nthree\n");
+      });
+
+      it("appendText(text, -10)", function() {
+        f.appendText("hi", -10);
+        f.text.must.be.eq("hizero\none\ntwo\nthree\n");
+      });
+
+      it("appendText(text, 0)", function() {
+        f.appendText("hi", 0);
+        f.text.must.be.eq("hizero\none\ntwo\nthree\n");
+      });
+
+      it("appendText(text, 1)", function() {
+        f.appendText("hi", 1);
+        f.text.must.be.eq("zero\nhione\ntwo\nthree\n");
+      });
+
+      it("appendText(text, 2)", function() {
+        f.appendText("hi", 2);
+        f.text.must.be.eq("zero\none\nhitwo\nthree\n");
+      });
+
+      it("appendText(text, 3)", function() {
+        f.appendText("hi", 3);
+        f.text.must.be.eq("zero\none\ntwo\nhithree\n");
+      });
+
+      it("appendText(text, 4)", function() {
+        f.appendText("hi", 4);
+        f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
+      });
+
+      it("appendText(text, 5)", function() {
+        f.appendText("hi", 5);
+        f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
+      });
+
+      it("appendText(text, 6)", function() {
+        f.appendText("hi", 6);
+        f.text.must.be.eq("zero\none\ntwo\nthree\nhi");
+      });
     });
   });
 

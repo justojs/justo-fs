@@ -188,10 +188,11 @@ f.createFrom(["/my/dir/a.txt", "/my/dir/b.txt"], {separator: "\n\n"});
 
 ### appendText()
 
-Appends a text at the end of the file:
+Appends a text at the end of the file or a given number of line:
 
 ```
 f.appendText(text : string)
+f.appendText(text : string, ln : number)
 ```
 
 ### remove()

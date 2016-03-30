@@ -167,8 +167,29 @@ File = function (_Entry) {_inherits(File, _Entry);function File() {_classCallChe
 
 
 
-    text) {
-      _fs2.default.appendFileSync(this.path, text, "utf8");} }, { key: "truncate", value: function truncate() 
+
+
+
+
+
+    text, line) {
+      if (line === undefined) {
+        _fs2.default.appendFileSync(this.path, text, "utf8");} else 
+      {
+        var content = this.text.split("\n");
+
+        if (line < 0) line += content.length;
+
+        if (line <= 0) {
+          this.text = text + content.join("\n");} else 
+        if (line >= content.length) {
+          this.appendText(text);} else 
+        {
+          this.text = content.slice(0, line).join("\n") + "\n" + 
+          text + 
+          content.slice(line).join("\n");}}} }, { key: "truncate", value: function truncate() 
+
+
 
 
 
