@@ -9,7 +9,16 @@ var _File = require("./File");var _File2 = _interopRequireDefault(_File);functio
 
 
 
-Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(this, Dir);return _possibleConstructorReturn(this, Object.getPrototypeOf(Dir).apply(this, arguments));}_createClass(Dir, [{ key: "file", value: function file(
+Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(this, Dir);return _possibleConstructorReturn(this, Object.getPrototypeOf(Dir).apply(this, arguments));}_createClass(Dir, [{ key: "hasEntries", value: function hasEntries() 
+
+
+
+
+
+    {
+      return _fs2.default.readdirSync(this.path).length > 0;} }, { key: "file", value: function file(
+
+
 
 
 

@@ -286,6 +286,14 @@ entries : Entry[]     //the directory entries
 files : File[]        //the directory files
 ```
 
+### hasEntries()
+
+Check whether the directory has entries:
+
+```
+hasEntries() : boolean
+```
+
 ### file() and dir()
 
 If we need to get an entry as `File` or `Dir`, we can use:

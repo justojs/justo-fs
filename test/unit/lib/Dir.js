@@ -83,6 +83,18 @@ describe("Dir", function() {
     });
   });
 
+  describe("#hasEntries()", function() {
+    it("hasEntries() : true", function() {
+      new Dir(SRC_DIR).hasEntries().must.be.eq(true);
+    });
+
+    it("hasEntries() : false", function() {
+      var dir = Dir.createTmpDir();
+      dir.hasEntries().must.be.eq(false);
+      dir.remove();
+    });
+  });
+
   describe("#entries", function() {
     var src, dst;
 
