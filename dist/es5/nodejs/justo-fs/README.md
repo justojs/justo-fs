@@ -294,6 +294,18 @@ Check whether the directory has entries:
 hasEntries() : boolean
 ```
 
+### getFileNames()
+
+Return the file names:
+
+```
+getFileNames() : string[]
+getFileNames({ext: false}) : string[]
+```
+
+The `ext` option is used to indicate if the extension must be returned. Its
+default value is true.
+
 ### file() and dir()
 
 If we need to get an entry as `File` or `Dir`, we can use:

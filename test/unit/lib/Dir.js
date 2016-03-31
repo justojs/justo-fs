@@ -138,6 +138,22 @@ describe("Dir", function() {
     });
   });
 
+  describe("#getFileNames()", function() {
+    var dir;
+
+    beforeEach(function() {
+      dir = new Dir(SRC_DIR);
+    });
+
+    it("getFilenames()", function() {
+      dir.getFileNames().sort().must.be.eq(["a.txt", "append.txt", "b.txt", "file.json", "file.yml"]);
+    });
+
+    it("getFileNames({ext: false})", function() {
+      dir.getFileNames({ext: false}).sort().must.be.eq(["a", "append", "b", "file", "file"]);
+    });
+  });
+
   describe("#file()", function() {
     it("file(subpath)", function() {
       var dir = new Dir(SRC_DIR);

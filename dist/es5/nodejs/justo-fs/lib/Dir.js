@@ -16,7 +16,7 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
     {
-      return _fs2.default.readdirSync(this.path).length > 0;} }, { key: "file", value: function file(
+      return _fs2.default.readdirSync(this.path).length > 0;} }, { key: "getFileNames", value: function getFileNames(
 
 
 
@@ -58,6 +58,34 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
 
+
+
+
+
+
+
+
+
+    opts) {
+      var res = [];
+
+
+      if (!opts) opts = {};
+      if (!opts.hasOwnProperty("ext")) opts.ext = true;
+
+
+      for (var i = 0, items = _fs2.default.readdirSync(this.path); i < items.length; ++i) {
+        var item = items[i];
+        var stats = _fs2.default.statSync(_path2.default.join(this.path, item));
+
+        if (stats.isFile()) {
+          if (opts.ext) res.push(item);else 
+          res.push(_path2.default.basename(item, _path2.default.extname(item)));}}
+
+
+
+
+      return res;} }, { key: "file", value: function file(
 
 
 
