@@ -294,11 +294,15 @@ Check whether the directory has entries:
 hasEntries() : boolean
 ```
 
-### getFileNames()
+### Entry names
 
-Return the file names:
+Return the entry names:
 
 ```
+//files and dirs
+getEntryNames() : string[]
+
+//only files
 getFileNames() : string[]
 getFileNames({ext: false}) : string[]
 ```

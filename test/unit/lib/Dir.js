@@ -126,6 +126,18 @@ describe("Dir", function() {
     });
   });
 
+  describe("#getEntryNames()", function() {
+    var dir;
+
+    beforeEach(function() {
+      dir = new Dir(SRC_DIR);
+    });
+
+    it("getEntryNames()", function() {
+      dir.getEntryNames().sort().must.be.eq(["a.txt", "append.txt", "b.txt", "file.json", "file.yml", "ignore"]);
+    });
+  });
+
   describe("#files", function() {
     var dir;
 
