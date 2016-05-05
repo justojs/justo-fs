@@ -250,11 +250,11 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
       if (!opts) opts = {};
 
 
-      _get(Object.getPrototypeOf(Dir.prototype), "chown", this).call(this, user, group, opts);
-
       if (opts.recurse) {var _iteratorNormalCompletion3 = true;var _didIteratorError3 = false;var _iteratorError3 = undefined;try {
-          for (var _iterator3 = this.entries[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {var entry = _step3.value;entry.chown(user, group, opts);}} catch (err) {_didIteratorError3 = true;_iteratorError3 = err;} finally {try {if (!_iteratorNormalCompletion3 && _iterator3.return) {_iterator3.return();}} finally {if (_didIteratorError3) {throw _iteratorError3;}}}}} }, { key: "chmod", value: function chmod(
+          for (var _iterator3 = this.entries[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {var entry = _step3.value;entry.chown(user, group, opts);}} catch (err) {_didIteratorError3 = true;_iteratorError3 = err;} finally {try {if (!_iteratorNormalCompletion3 && _iterator3.return) {_iterator3.return();}} finally {if (_didIteratorError3) {throw _iteratorError3;}}}}
 
+
+      _get(Object.getPrototypeOf(Dir.prototype), "chown", this).call(this, user, group, opts);} }, { key: "chmod", value: function chmod(
 
 
 
