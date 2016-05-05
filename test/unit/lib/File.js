@@ -15,6 +15,7 @@ describe("File", function() {
 
   before(function() {
     fs.mkdirSync(DST_DIR);
+    fsx.copySync(SRC_DIR, DST_DIR);
   });
 
   after(function() {
@@ -51,6 +52,38 @@ describe("File", function() {
     it("#size", function() {
       f.size.must.be.instanceOf(Number);
       f.size.must.be.gt(0);
+    });
+  });
+
+  describe("#uid", function() {
+    var f;
+
+    before(function() {
+      f = new File(DST_DIR, "a.txt");
+    });
+
+    it("uid : number", function() {
+      f.uid.must.be.instanceOf(Number);
+    });
+
+    it("uid = value", function() {
+      f.uid = 1;
+    });
+  });
+
+  describe("#gid", function() {
+    var f;
+
+    before(function() {
+      f = new File(DST_DIR, "a.txt");
+    });
+
+    it("gid : number", function() {
+      f.gid.must.be.instanceOf(Number);
+    });
+
+    it("gid = value", function() {
+      f.gid = 1;
     });
   });
 

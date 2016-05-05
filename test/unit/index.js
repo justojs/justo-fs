@@ -1,5 +1,6 @@
 //imports
 const assert = require("assert");
+const path = require("path");
 const fs = require("../../dist/es5/nodejs/justo-fs");
 const File = fs.File;
 const Dir = fs.Dir;
@@ -78,6 +79,33 @@ describe("fs", function() {
 
     it("rename(from, to) : false", function() {
       fs.rename(TMP_DIR.path + "/unknown.txt", "known.txt").must.be.eq(false);
+    });
+  });
+
+  describe("#chown()", function() {
+    beforeEach(function() {
+      TMP_DIR.create();
+      new Dir(DATA_DIR).copyTo(TMP_DIR);
+    });
+
+    afterEach(function() {
+      TMP_DIR.remove();
+    });
+
+    it("chown(owner)", function() {
+      fs.chown(path.join(TMP_DIR.path, "a.txt"), 1);
+    });
+
+    it("chown(owner, group)", function() {
+      fs.chown(path.join(TMP_DIR.path, "a.txt"), 1, 1);
+    });
+
+    it("chown(undefined, group)", function() {
+      fs.chown(path.join(TMP_DIR.path, "a.txt"), undefined, 1);
+    });
+
+    it("chown(undefined, undefined)", function() {
+      fs.chown(path.join(TMP_DIR.path, "a.txt"));
     });
   });
 });

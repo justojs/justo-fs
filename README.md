@@ -1,4 +1,7 @@
+[![NPM version](http://img.shields.io/npm/v/justo-fs.svg)](https://www.npmjs.org/package/justo-fs)
 [![Build Status](https://travis-ci.org/justojs/justo-fs.svg)](https://travis-ci.org/justojs/justo-fs)
+[![Dependency Status](https://david-dm.org/justojs/justo-fs.svg)](https://david-dm.org/justojs/justo-fs)
+[![devDependency Status](https://david-dm.org/justojs/justo-fs/dev-status.svg)](https://david-dm.org/justojs/justo-fs#info=devDependencies)
 
 Simple object-oriented file system API.
 
@@ -41,9 +44,11 @@ parent : Dir          //the parent directory
 parentPath : string   //the parent directory path
 size : number         //the file size in bytes
 times : object        //the times: modified, change, access, creation
+uid : number          //the owner UID
+gid : number          //the group GID
 ```
 
-#### Renaming
+#### Renaming the file
 
 To rename a file, we have to use the `name` property.
 If the new name contains a path, the method raises an error
@@ -65,6 +70,39 @@ f.name = "file.old";
 console.log(f.name);  //now: file.old
 ```
 
+#### Changing the owner UID
+
+To change the owner UID, we can use the `chown()` method or the `uid` property:
+
+```
+uid : number
+chown(uid : number, gid ?: number)
+```
+
+Example:
+
+```
+f.uid = 123;
+f.chown(123);
+```
+
+#### Changing the group UID
+
+To change the group UID, we can use the `chown()` method or the `gid` property:
+
+```
+gid : number
+chown(uid : number, gid : number)
+```
+
+Example:
+
+```
+f.uid = 123;
+f.gid = 321;
+f.chown(123, 321);
+```
+
 ### Replacing partial path
 
 To replace a partial path, we can use the `replace()` method:
@@ -79,6 +117,20 @@ Example:
 var f = new File("/my/dir/file.txt");
 var path = f.replacePath("/my/dir");  //path = "/file.txt" and f = "/my/dir/file.txt"
 var path = f.replacePath("/my/dir/"); //path = "file.txt" and f = "/my/dir/file.txt"
+```
+
+### chmod()
+
+To change the file mode, we can use the `chmod()` method:
+
+```
+chmod(mode : number)
+```
+
+Example:
+
+```
+file.chmod(777);
 ```
 
 ### Content
@@ -284,6 +336,8 @@ parentPath : string   //the parent directory path
 times : object        //the times: modified, change, access, creation
 entries : Entry[]     //the directory entries
 files : File[]        //the directory files
+uid : number          //the owner UID
+gid : number          //the group GID
 ```
 
 ### hasEntries()
@@ -327,9 +381,13 @@ dir.file("file.txt");       //new File(dir.path, "file.txt");
 dir.dir("dir");             //new Dir(dir.path, "dir");
 ```
 
-### Renaming
+### Renaming directory
 
 Similar to files, using the `name` property.
+
+### Changing UID and GID
+
+Similar to files, using `uid`, `gid` or `chown()`.
 
 ### Temporary directory
 
@@ -435,7 +493,9 @@ exists(...path) : boolean
 entry(...path) : File|Dir|undefined
 remove(...path)
 copy(src, dst)
-rename(from, to) : boolean
+rename(from : string, to : string) : boolean
+chown(path : string, owner : number, group : number)
+chmod(path : string, mode : number)
 ```
 
 The `exists()` function returns whether an entry (file or directory) exists.
@@ -448,6 +508,10 @@ The `remove()` function removes an entry.
 The `copy()` function copies a source to destination. Its behavior is as following:
 
 The `rename()` function renames an entry.
+
+The `chown()` function changes the owner and the group.
+
+The `chmod()` function changes the mode.
 
 ```
 entry(src).copyTo(dst);

@@ -106,3 +106,35 @@ export function rename(from, to) {
   //(2) return
   return res;
 }
+
+/**
+ * Change owner and group.
+ *
+ * @param path:string
+ * @param owner:number
+ * @param group?:number
+ */
+export function chown(path, owner, group) {
+  //(1) arguments
+  if (owner === undefined || owner === null) {
+    owner = fs.statSync(path).uid;
+  }
+
+  if (group === undefined || group === null) {
+    group = fs.statSync(path).gid;
+  }
+
+  //(2) change
+  fs.chownSync(path, owner, group);
+}
+
+
+/**
+ * Change permissions.
+ *
+ * @param path:string The entry path.
+ * @param mode:number The new mode.
+ */
+export function chmod(path, mode) {
+  fs.chmodSync(path, mode);
+}

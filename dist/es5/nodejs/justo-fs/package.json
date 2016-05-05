@@ -1,11 +1,11 @@
 {
   "name": "justo-fs",
-  "version": "0.10.10",
+  "version": "0.11.0",
   "description": "Simple object-oriented file system API.",
   "homepage": "http://www.justojs.org",
   "author": {
     "name": "Justo Labs",
-    "email": "justojs@justolabs.com",
+    "email": "info@justolabs.com",
     "url": "http://www.justojs.org"
   },
   "contributors": [
@@ -39,7 +39,7 @@
   "peerDependencies": {},
   "devDependencies": {
     "babel-preset-es2015": "*",
-    "grunt": "^0.4.5",
+    "grunt": "*",
     "grunt-babel": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-copy": "*",

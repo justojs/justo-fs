@@ -108,13 +108,13 @@ File = function (_Entry) {_inherits(File, _Entry);function File() {_classCallChe
 
 
     {var opts = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var res = undefined;
+      var res = void 0;
 
 
       if (this.exists() && opts.hasOwnProperty("overwrite") && !opts.overwrite) {
         res = false;} else 
       {
-        var content = undefined;
+        var content = void 0;
 
 
         if (opts.content) {
