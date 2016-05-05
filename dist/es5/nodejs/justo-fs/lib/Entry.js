@@ -200,8 +200,29 @@ Entry = function () {
 
 
 
-    owner, group) {
-      _fs2.default.chownSync(this.path, owner, group);} }, { key: "chmod", value: function chmod(
+
+
+
+
+
+
+    user) {
+      var group, opts;for (var _len4 = arguments.length, rest = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {rest[_key4 - 1] = arguments[_key4];}
+
+
+      if (rest.length == 1) {
+        if (typeof rest[0] == "number") group = rest[0];else 
+        opts = rest[0];} else 
+      if (rest.length >= 2) {
+        group = rest[0];opts = rest[1];}
+
+
+
+      if (user === undefined || user === null) user = _fs2.default.statSync(this.path).uid;
+      if (group === undefined || group === null) group = _fs2.default.statSync(this.path).gid;
+
+
+      _fs2.default.chownSync(this.path, user, group);} }, { key: "chmod", value: function chmod(
 
 
 
@@ -209,7 +230,7 @@ Entry = function () {
 
 
 
-    mode) {
+    mode, opts) {
       _fs2.default.chmodSync(this.path, mode);} }, { key: "toString", value: function toString() 
 
 
@@ -217,4 +238,4 @@ Entry = function () {
 
 
     {
-      return this.path;} }, { key: "path", get: function get() {return this._path;} }, { key: "name", get: function get() {return _path2.default.basename(this.path);}, set: function set(newName) {var newPath;if (newName.indexOf("/") >= 0 || newName.indexOf("\\") >= 0) {throw new Error("The new name contains / or \\. To move, use moveTo().");}newPath = _path2.default.join(this.parentPath, newName);_fs2.default.renameSync(this.path, newPath);this._path = _path2.default.normalize(newPath);} }, { key: "parentPath", get: function get() {return _path2.default.dirname(this.path);} }, { key: "parent", get: function get() {return new _Dir2.default(this.parentPath);} }, { key: "times", get: function get() {var stat;stat = _fs2.default.statSync(this.path);return { modified: stat.mtime, change: stat.ctime, access: stat.atime, creation: stat.birthtime };} }, { key: "uid", get: function get() {return _fs2.default.statSync(this.path).uid;}, set: function set(value) {this.chown(value, this.gid);} }, { key: "gid", get: function get() {return _fs2.default.statSync(this.path).gid;}, set: function set(value) {this.chown(this.uid, value);} }]);return Entry;}();exports.default = Entry;
+      return this.path;} }, { key: "path", get: function get() {return this._path;} }, { key: "name", get: function get() {return _path2.default.basename(this.path);}, set: function set(newName) {var newPath;if (newName.indexOf("/") >= 0 || newName.indexOf("\\") >= 0) {throw new Error("The new name contains / or \\. To move, use moveTo().");}newPath = _path2.default.join(this.parentPath, newName);_fs2.default.renameSync(this.path, newPath);this._path = _path2.default.normalize(newPath);} }, { key: "parentPath", get: function get() {return _path2.default.dirname(this.path);} }, { key: "parent", get: function get() {return new _Dir2.default(this.parentPath);} }, { key: "times", get: function get() {var stat;stat = _fs2.default.statSync(this.path);return { modified: stat.mtime, change: stat.ctime, access: stat.atime, creation: stat.birthtime };} }, { key: "uid", get: function get() {return _fs2.default.statSync(this.path).uid;}, set: function set(value) {this.chown(value);} }, { key: "gid", get: function get() {return _fs2.default.statSync(this.path).gid;}, set: function set(value) {this.chown(undefined, value);} }]);return Entry;}();exports.default = Entry;

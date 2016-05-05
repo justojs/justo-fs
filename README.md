@@ -124,13 +124,13 @@ var path = f.replacePath("/my/dir/"); //path = "file.txt" and f = "/my/dir/file.
 To change the file mode, we can use the `chmod()` method:
 
 ```
-chmod(mode : number)
+chmod(mode : number|string)
 ```
 
 Example:
 
 ```
-file.chmod(777);
+file.chmod("777");
 ```
 
 ### Content
@@ -388,6 +388,11 @@ Similar to files, using the `name` property.
 ### Changing UID and GID
 
 Similar to files, using `uid`, `gid` or `chown()`.
+We can also indicate `recurse` as option; for example:
+
+```
+dir.chown(1, 1, {recurse: true});
+```
 
 ### Temporary directory
 
@@ -494,8 +499,8 @@ entry(...path) : File|Dir|undefined
 remove(...path)
 copy(src, dst)
 rename(from : string, to : string) : boolean
-chown(path : string, owner : number, group : number)
-chmod(path : string, mode : number)
+chown(path : string, owner : number, group ?: number, opts ?: object)
+chmod(path : string, mode : number|string)
 ```
 
 The `exists()` function returns whether an entry (file or directory) exists.

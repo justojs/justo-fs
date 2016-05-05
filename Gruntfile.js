@@ -20,7 +20,8 @@ module.exports = function(grunt) {
         	"build/es5/index.js": "index.js",
           "build/es5/lib/Dir.js": "lib/Dir.js",
           "build/es5/lib/Entry.js": "lib/Entry.js",
-          "build/es5/lib/File.js": "lib/File.js"
+          "build/es5/lib/File.js": "lib/File.js",
+          "build/es5/lib/util.js": "lib/util.js"
         }
       }
     },
