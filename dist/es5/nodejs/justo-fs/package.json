@@ -1,6 +1,6 @@
 {
   "name": "justo-fs",
-  "version": "0.11.2",
+  "version": "0.11.3",
   "description": "Simple object-oriented file system API.",
   "homepage": "http://www.justojs.org",
   "author": {

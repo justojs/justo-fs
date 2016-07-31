@@ -161,8 +161,36 @@ describe("Dir", function() {
       dir.getFileNames().sort().must.be.eq(["a.txt", "append.txt", "b.txt", "file.json", "file.yml"]);
     });
 
+    it("getFilenames({ext: true})", function() {
+      dir.getFileNames().sort().must.be.eq(["a.txt", "append.txt", "b.txt", "file.json", "file.yml"]);
+    });
+
     it("getFileNames({ext: false})", function() {
       dir.getFileNames({ext: false}).sort().must.be.eq(["a", "append", "b", "file", "file"]);
+    });
+
+    it("getFileNames({ignore: string})", function() {
+      dir.getFileNames({ignore: "append.txt"}).sort().must.be.eq(["a.txt", "b.txt", "file.json", "file.yml"]);
+    });
+
+    it("getFileNames({ignore: string, ext: true})", function() {
+      dir.getFileNames({ignore: "append.txt", ext: true}).sort().must.be.eq(["a.txt", "b.txt", "file.json", "file.yml"]);
+    });
+
+    it("getFileNames({ignore: string, ext: false})", function() {
+      dir.getFileNames({ignore: "append.txt", ext: false}).sort().must.be.eq(["a", "b", "file", "file"]);
+    });
+
+    it("getFileNames({ignore: string[]})", function() {
+      dir.getFileNames({ignore: ["append.txt"]}).sort().must.be.eq(["a.txt", "b.txt", "file.json", "file.yml"]);
+    });
+
+    it("getFileNames({ignore: string[], ext: true})", function() {
+      dir.getFileNames({ignore: ["append.txt"], ext: true}).sort().must.be.eq(["a.txt", "b.txt", "file.json", "file.yml"]);
+    });
+
+    it("getFileNames({ignore: string[], ext: false})", function() {
+      dir.getFileNames({ignore: ["append.txt"], ext: false}).sort().must.be.eq(["a", "b", "file", "file"]);
     });
   });
 

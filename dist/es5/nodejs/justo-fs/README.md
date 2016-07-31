@@ -358,11 +358,13 @@ getEntryNames() : string[]
 
 //only files
 getFileNames() : string[]
-getFileNames({ext: false}) : string[]
+getFileNames(opts : object) : string[]
 ```
 
-The `ext` option is used to indicate if the extension must be returned. Its
-default value is true.
+Options:
+
+- `ext` (boolean). Used to indicate if the extension must be returned. Default value: `true`.
+- `ignore` (string or string[]). Files to ignore/skip.
 
 ### file() and dir()
 

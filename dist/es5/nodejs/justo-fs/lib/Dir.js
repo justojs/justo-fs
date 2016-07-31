@@ -45,7 +45,7 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
     {
-      return _fs2.default.readdirSync(this.path);} }, { key: "getFileNames", value: function getFileNames(
+      return _fs2.default.readdirSync(this.path);} }, { key: "getFileNames", value: function getFileNames() 
 
 
 
@@ -72,20 +72,24 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
 
-    opts) {
-      var res = [];
+    {var opts = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var res = [], ext = true, ignore = [];
 
 
       if (!opts) opts = {};
-      if (!opts.hasOwnProperty("ext")) opts.ext = true;var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
+      if (opts.hasOwnProperty("ext")) ext = !!opts.ext;
+      if (typeof opts.ignore == "string") ignore = [opts.ignore];else 
+      if (opts.ignore instanceof Array) ignore = opts.ignore;var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
 
 
         for (var _iterator = _fs2.default.readdirSync(this.path)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var item = _step.value;
-          var stats = _fs2.default.statSync(_path2.default.join(this.path, item));
+          if (ignore.indexOf(item) < 0) {
+            var stats = _fs2.default.statSync(_path2.default.join(this.path, item));
 
-          if (stats.isFile()) {
-            if (opts.ext) res.push(item);else 
-            res.push(_path2.default.basename(item, _path2.default.extname(item)));}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+            if (stats.isFile()) {
+              if (ext) res.push(item);else 
+              res.push(_path2.default.basename(item, _path2.default.extname(item)));}}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+
 
 
 
