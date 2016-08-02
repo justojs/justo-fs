@@ -4,6 +4,7 @@ const fsx = require("fs-extra");
 const path = require("path");
 const os = require("os");
 const dir = require("justo-assert-fs").dir;
+const file = require("justo-assert-fs").file;
 const File = require("../../../dist/es5/nodejs/justo-fs").File;
 const Dir = require("../../../dist/es5/nodejs/justo-fs").Dir;
 
@@ -266,11 +267,21 @@ describe("Dir", function() {
       dir(dst.path, "ignore").must.have(["c.txt"]);
     });
 
-    it("copyTo({path, ignore : string})", function() {
-      src.copyTo({path: dst.path, ignore: path.join(SRC_DIR, "ignore")});
-      dst.exists().must.be.eq(true);
-      dir(dst.path).must.have(["a.txt", "b.txt", "file.json", "file.yml", "ignore"]);
-      dir(dst.path, "ignore").must.not.have("c.txt");
+    describe("ignore", function() {
+      it("copyTo({path, ignore : string}) - dir to ignore", function() {
+        src.copyTo({path: dst.path, ignore: path.join(SRC_DIR, "ignore")});
+        dst.exists().must.be.eq(true);
+        dir(dst.path).must.have(["a.txt", "b.txt", "file.json", "file.yml"]);
+        dir(dst.path, "ignore").must.not.exist();
+      });
+
+      it("copyTo({path, ignore : string}) - file to ignore", function() {
+        src.copyTo({path: dst.path, ignore: "a.txt"});
+        dir(dst.path).must.exist();
+        dir(dst.path).must.have(["b.txt", "file.json", "file.yml", "ignore"]);
+        file(dst.path, "a.txt").must.not.exist();
+        file(dst.path, "ignore", "c.txt").must.exist();
+      });
     });
   });
 

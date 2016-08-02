@@ -1,6 +1,6 @@
 {
   "name": "justo-fs",
-  "version": "0.11.3",
+  "version": "0.11.4",
   "description": "Simple object-oriented file system API.",
   "homepage": "http://www.justojs.org",
   "author": {
@@ -30,10 +30,11 @@
     "url": "https://github.com/justojs/justo-fs.git"
   },
   "engines": {
-    "node": ">= 0.12.0"
+    "node": ">= 4.0.0"
   },
   "dependencies": {
     "fs-extra": "*",
+    "justo-sync": "*",
     "js-yaml": ">=3.6.0"
   },
   "peerDependencies": {},
