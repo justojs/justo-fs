@@ -203,7 +203,15 @@ describe("Dir", function() {
     });
 
     it("getDirNames()", function() {
-      dir.getDirNames().sort().must.be.eq(["d1", "d2"]);
+      dir.getDirNames().sort().must.be.eq(["d1", "d2", "d3"]);
+    });
+
+    it("getDirNames({ignore: string})", function() {
+      dir.getDirNames({ignore: "d2"}).sort().must.be.eq(["d1", "d3"]);
+    });
+
+    it("getDirNames({ignore: string[]})", function() {
+      dir.getDirNames({ignore: ["d2"]}).sort().must.be.eq(["d1", "d3"]);
     });
   });
 

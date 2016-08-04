@@ -95,7 +95,7 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
 
-      return res;} }, { key: "getDirNames", value: function getDirNames() 
+      return res;} }, { key: "getDirNames", value: function getDirNames(
 
 
 
@@ -103,13 +103,21 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
 
-    {
-      var res = [];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
+
+    opts) {
+      var res = [], ignore = [];
+
+
+      if (!opts) opts = {};
+      if (typeof opts.ignore == "string") ignore = [opts.ignore];else 
+      if (opts.ignore instanceof Array) ignore = opts.ignore;var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
 
 
         for (var _iterator2 = _fs2.default.readdirSync(this.path)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var item = _step2.value;
-          var stats = _fs2.default.statSync(_path2.default.join(this.path, item));
-          if (stats.isDirectory()) res.push(item);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
+          if (ignore.indexOf(item) < 0) {
+            var stats = _fs2.default.statSync(_path2.default.join(this.path, item));
+            if (stats.isDirectory()) res.push(item);}}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
+
 
 
 

@@ -362,12 +362,13 @@ getFileNames(opts : object) : string[]
 
 //only dirs
 getDirNames() : string[]
+getDirNames(opts : object) : string[]
 ```
 
 Options:
 
 - `ext` (boolean). Used to indicate if the extension must be returned. Default value: `true`.
-- `ignore` (string or string[]). Files to ignore/skip.
+- `ignore` (string or string[]). Entries to ignore/skip.
 
 ### file() and dir()
 
