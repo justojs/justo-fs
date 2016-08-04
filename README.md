@@ -359,6 +359,9 @@ getEntryNames() : string[]
 //only files
 getFileNames() : string[]
 getFileNames(opts : object) : string[]
+
+//only dirs
+getDirNames() : string[]
 ```
 
 Options:

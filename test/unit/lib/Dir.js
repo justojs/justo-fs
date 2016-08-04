@@ -114,7 +114,7 @@ describe("Dir", function() {
     it("entries : Entry[]", function() {
       var ee = dst.entries;
 
-      ee.length.must.be.eq(7);
+      ee.length.must.be.eq(8);
 
       for (var i = 0; i < ee.length; ++i) {
         var entry = ee[i];
@@ -135,7 +135,7 @@ describe("Dir", function() {
     });
 
     it("getEntryNames()", function() {
-      dir.getEntryNames().sort().must.be.eq(["a.txt", "append.txt", "b.txt", "file.json", "file.yml", "ignore"]);
+      dir.getEntryNames().sort().must.be.eq(["a.txt", "append.txt", "b.txt", "dir", "file.json", "file.yml", "ignore"]);
     });
   });
 
@@ -192,6 +192,18 @@ describe("Dir", function() {
 
     it("getFileNames({ignore: string[], ext: false})", function() {
       dir.getFileNames({ignore: ["append.txt"], ext: false}).sort().must.be.eq(["a", "b", "file", "file"]);
+    });
+  });
+
+  describe("#getDirNames()", function() {
+    var dir;
+
+    beforeEach(function() {
+      dir = new Dir(SRC_DIR, "dir");
+    });
+
+    it("getDirNames()", function() {
+      dir.getDirNames().sort().must.be.eq(["d1", "d2"]);
     });
   });
 

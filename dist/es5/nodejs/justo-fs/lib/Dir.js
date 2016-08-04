@@ -95,6 +95,24 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
 
 
+      return res;} }, { key: "getDirNames", value: function getDirNames() 
+
+
+
+
+
+
+
+    {
+      var res = [];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
+
+
+        for (var _iterator2 = _fs2.default.readdirSync(this.path)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var item = _step2.value;
+          var stats = _fs2.default.statSync(_path2.default.join(this.path, item));
+          if (stats.isDirectory()) res.push(item);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
+
+
+
       return res;} }, { key: "file", value: function file(
 
 
@@ -178,12 +196,12 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
 
                   entry = _path2.default.normalize(entry);
 
-                  copy = true;var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
-                    for (var _iterator2 = ignore[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var i = _step2.value;
+                  copy = true;var _iteratorNormalCompletion3 = true;var _didIteratorError3 = false;var _iteratorError3 = undefined;try {
+                    for (var _iterator3 = ignore[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {var i = _step3.value;
                       i = _path2.default.normalize(i);
                       if (entry.endsWith(i)) {
                         copy = false;
-                        break;}}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
+                        break;}}} catch (err) {_didIteratorError3 = true;_iteratorError3 = err;} finally {try {if (!_iteratorNormalCompletion3 && _iterator3.return) {_iterator3.return();}} finally {if (_didIteratorError3) {throw _iteratorError3;}}}
 
 
 
@@ -261,8 +279,8 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
       if (!opts) opts = {};
 
 
-      if (opts.recurse) {var _iteratorNormalCompletion3 = true;var _didIteratorError3 = false;var _iteratorError3 = undefined;try {
-          for (var _iterator3 = this.entries[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {var entry = _step3.value;entry.chown(user, group, opts);}} catch (err) {_didIteratorError3 = true;_iteratorError3 = err;} finally {try {if (!_iteratorNormalCompletion3 && _iterator3.return) {_iterator3.return();}} finally {if (_didIteratorError3) {throw _iteratorError3;}}}}
+      if (opts.recurse) {var _iteratorNormalCompletion4 = true;var _didIteratorError4 = false;var _iteratorError4 = undefined;try {
+          for (var _iterator4 = this.entries[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {var entry = _step4.value;entry.chown(user, group, opts);}} catch (err) {_didIteratorError4 = true;_iteratorError4 = err;} finally {try {if (!_iteratorNormalCompletion4 && _iterator4.return) {_iterator4.return();}} finally {if (_didIteratorError4) {throw _iteratorError4;}}}}
 
 
       _get(Object.getPrototypeOf(Dir.prototype), "chown", this).call(this, user, group, opts);} }, { key: "chmod", value: function chmod(
@@ -276,8 +294,8 @@ Dir = function (_Entry) {_inherits(Dir, _Entry);function Dir() {_classCallCheck(
       if (!opts) opts = {};
 
 
-      if (opts.recurse) {var _iteratorNormalCompletion4 = true;var _didIteratorError4 = false;var _iteratorError4 = undefined;try {
-          for (var _iterator4 = this.entries[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {var entry = _step4.value;entry.chmod(mode, opts);}} catch (err) {_didIteratorError4 = true;_iteratorError4 = err;} finally {try {if (!_iteratorNormalCompletion4 && _iterator4.return) {_iterator4.return();}} finally {if (_didIteratorError4) {throw _iteratorError4;}}}}
+      if (opts.recurse) {var _iteratorNormalCompletion5 = true;var _didIteratorError5 = false;var _iteratorError5 = undefined;try {
+          for (var _iterator5 = this.entries[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {var entry = _step5.value;entry.chmod(mode, opts);}} catch (err) {_didIteratorError5 = true;_iteratorError5 = err;} finally {try {if (!_iteratorNormalCompletion5 && _iterator5.return) {_iterator5.return();}} finally {if (_didIteratorError5) {throw _iteratorError5;}}}}
 
 
-      _get(Object.getPrototypeOf(Dir.prototype), "chmod", this).call(this, mode, opts);} }, { key: "entries", get: function get() {var res = [];var _iteratorNormalCompletion5 = true;var _didIteratorError5 = false;var _iteratorError5 = undefined;try {for (var _iterator5 = _fs2.default.readdirSync(this.path)[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {var item = _step5.value;var stats = _fs2.default.statSync(_path2.default.join(this.path, item));if (stats.isFile()) res.push(new _File2.default(this.path, item));else if (stats.isDirectory()) res.push(new Dir(this.path, item));}} catch (err) {_didIteratorError5 = true;_iteratorError5 = err;} finally {try {if (!_iteratorNormalCompletion5 && _iterator5.return) {_iterator5.return();}} finally {if (_didIteratorError5) {throw _iteratorError5;}}}return res;} }, { key: "files", get: function get() {var res = [];var _iteratorNormalCompletion6 = true;var _didIteratorError6 = false;var _iteratorError6 = undefined;try {for (var _iterator6 = _fs2.default.readdirSync(this.path)[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {var item = _step6.value;var stats = _fs2.default.statSync(_path2.default.join(this.path, item));if (stats.isFile()) res.push(new _File2.default(this.path, item));}} catch (err) {_didIteratorError6 = true;_iteratorError6 = err;} finally {try {if (!_iteratorNormalCompletion6 && _iterator6.return) {_iterator6.return();}} finally {if (_didIteratorError6) {throw _iteratorError6;}}}return res;} }], [{ key: "createTmpDir", value: function createTmpDir() {var dir;if (arguments.length === 0) dir = Date.now().toString();else dir = _path2.default.join.apply(_path2.default, arguments);dir = new Dir(Dir.TMP_DIR, dir);if (!dir.create()) throw new Error("The '" + dir.path + " hasn't been able to be created.");return dir;} }, { key: "TMP_DIR", get: function get() {return _os2.default.tmpdir();} }, { key: "TMP", get: function get() {return _os2.default.tmpdir();} }]);return Dir;}(_Entry3.default);exports.default = Dir;
+      _get(Object.getPrototypeOf(Dir.prototype), "chmod", this).call(this, mode, opts);} }, { key: "entries", get: function get() {var res = [];var _iteratorNormalCompletion6 = true;var _didIteratorError6 = false;var _iteratorError6 = undefined;try {for (var _iterator6 = _fs2.default.readdirSync(this.path)[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {var item = _step6.value;var stats = _fs2.default.statSync(_path2.default.join(this.path, item));if (stats.isFile()) res.push(new _File2.default(this.path, item));else if (stats.isDirectory()) res.push(new Dir(this.path, item));}} catch (err) {_didIteratorError6 = true;_iteratorError6 = err;} finally {try {if (!_iteratorNormalCompletion6 && _iterator6.return) {_iterator6.return();}} finally {if (_didIteratorError6) {throw _iteratorError6;}}}return res;} }, { key: "files", get: function get() {var res = [];var _iteratorNormalCompletion7 = true;var _didIteratorError7 = false;var _iteratorError7 = undefined;try {for (var _iterator7 = _fs2.default.readdirSync(this.path)[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {var item = _step7.value;var stats = _fs2.default.statSync(_path2.default.join(this.path, item));if (stats.isFile()) res.push(new _File2.default(this.path, item));}} catch (err) {_didIteratorError7 = true;_iteratorError7 = err;} finally {try {if (!_iteratorNormalCompletion7 && _iterator7.return) {_iterator7.return();}} finally {if (_didIteratorError7) {throw _iteratorError7;}}}return res;} }], [{ key: "createTmpDir", value: function createTmpDir() {var dir;if (arguments.length === 0) dir = Date.now().toString();else dir = _path2.default.join.apply(_path2.default, arguments);dir = new Dir(Dir.TMP_DIR, dir);if (!dir.create()) throw new Error("The '" + dir.path + " hasn't been able to be created.");return dir;} }, { key: "TMP_DIR", get: function get() {return _os2.default.tmpdir();} }, { key: "TMP", get: function get() {return _os2.default.tmpdir();} }]);return Dir;}(_Entry3.default);exports.default = Dir;
