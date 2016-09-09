@@ -503,7 +503,7 @@ of the entry type:
 exists(...path) : boolean
 entry(...path) : File|Dir|undefined
 remove(...path)
-copy(src, dst)
+copy(src, dst, opts)
 rename(from : string, to : string) : boolean
 chown(path : string, owner : number, group ?: number, opts ?: object)
 chmod(path : string, mode : number|string)
@@ -516,7 +516,9 @@ it returns `undefined`.
 
 The `remove()` function removes an entry.
 
-The `copy()` function copies a source to destination. Its behavior is as following:
+The `copy()` function copies a source to destination. `opts`:
+- `force` (boolean). Don't throw error if nonexistent.
+- `ignore` (string or string[]). Ignore the entries.
 
 The `rename()` function renames an entry.
 

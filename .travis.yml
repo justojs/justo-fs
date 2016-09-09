@@ -1,8 +1,5 @@
 language: node_js
 node_js:
-  - 4.0
-  - 4.1
-  - 4.2
   - 5.0
   - 5.1
   - 5.2
@@ -19,6 +16,8 @@ node_js:
   - 6.1
   - 6.2
   - 6.3
+  - 6.4
+  - 6.5
 sudo: required
 dist: trusty
 before_install: npm install -g grunt-cli

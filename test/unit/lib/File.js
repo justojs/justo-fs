@@ -66,7 +66,7 @@ describe("File", function() {
       f.uid.must.be.instanceOf(Number);
     });
 
-    it("uid = value", function() {
+    it.skip("uid = value", function() {
       f.uid = 1;
     });
   });
@@ -82,7 +82,7 @@ describe("File", function() {
       f.gid.must.be.instanceOf(Number);
     });
 
-    it("gid = value", function() {
+    it.skip("gid = value", function() {
       f.gid = 1;
     });
   });
